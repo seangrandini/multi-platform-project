@@ -14,8 +14,8 @@ namespace alertApp.Droid
 {
     class Constants
     {
-        public const string SenderID = "<GoogleProjectNumber>"; // Google API Project Number
-        public const string ListenConnectionString = "<Listen connection string>";
-        public const string NotificationHubName = "<hub name>";
+        public const string SenderID = "177791980289"; // Google API Project Number
+        public const string ListenConnectionString = "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=";
+        public const string NotificationHubName = "alarmapp";
     }
 }
