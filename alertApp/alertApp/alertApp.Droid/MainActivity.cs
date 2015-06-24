@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Util;
 using Gcm.Client;
 
+
 namespace alertApp.Droid
 {
 	[Activity (Label = "alertApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
