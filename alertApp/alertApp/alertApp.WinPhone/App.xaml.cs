@@ -69,11 +69,12 @@ namespace alertApp.WinPhone
                 channel = new HttpNotificationChannel("MyPushChannel");
                 channel.Open();
                 channel.BindToShellToast();
+                channel.BindToShellTile();
             }
 
             channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
             {
-                var hub = new NotificationHub("alertapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
+                var hub = new NotificationHub("alarmapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
                 await hub.RegisterNativeAsync(args.ChannelUri.ToString());
             });
         }
