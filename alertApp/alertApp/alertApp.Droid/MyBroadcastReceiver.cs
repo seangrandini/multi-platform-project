@@ -116,7 +116,7 @@ namespace alertApp.Droid
             .SetContentIntent(myPendingIntent)
             .SetContentTitle(title)
             .SetContentText(desc)
-            /*.SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)*/
+            .SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)
             .SetAutoCancel(true)
             .SetSmallIcon(Android.Resource.Drawable.SymActionEmail);
 
