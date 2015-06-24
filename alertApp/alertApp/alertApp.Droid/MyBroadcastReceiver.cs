@@ -106,7 +106,27 @@ namespace alertApp.Droid
 
         void createNotification(string title, string desc)
         {
-            //Create notification
+            //my create notification
+            //Creazione Intent
+            Intent myIntent = new Intent(this, typeof(MainActivity));
+
+            PendingIntent myPendingIntent = PendingIntent.GetActivity(this, 0, myIntent, PendingIntentFlags.UpdateCurrent);
+            //Creazione notifica
+            Notification.Builder myBuilder = new Notification.Builder(this)
+            .SetContentIntent(myPendingIntent)
+            .SetContentTitle(title)
+            .SetContentText(desc)
+            /*.SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)*/
+            .SetAutoCancel(true)
+            .SetSmallIcon(Android.Resource.Drawable.SymActionEmail);
+
+            Notification myNotification = myBuilder.Build();
+
+            NotificationManager myNotificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
+
+            myNotificationManager.Notify(1, myNotification);
+
+            /*//Create notification
             var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
 
             //Create an intent to show ui
@@ -121,13 +141,12 @@ namespace alertApp.Droid
             //Set the notification info
             //we use the pending intent, passing our ui intent over which will get called
             //when the notification is tapped.
-            Context context = getApplicationContext();
 
             notification.SetLatestEventInfo(this, title, desc, PendingIntent.GetActivity(this, 0, uiIntent, 0));
 
             //Show the notification
             notificationManager.Notify(1, notification);
-            dialogNotify(title, desc);
+            dialogNotify(title, desc);*/
         }
 
         protected void dialogNotify(String title, String message)

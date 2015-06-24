@@ -22,7 +22,6 @@ namespace alertApp.Droid
             GcmClient.CheckManifest(this);
 
             // Register for push notifications
-            Log.Info("MainActivity", "Registering...");
             GcmClient.Register(this, Constants.SenderID);
         }
 
@@ -34,9 +33,8 @@ namespace alertApp.Droid
 
             global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new alertApp.App ());
-
             RegisterWithGCM();
         }
-	}
+    }
 }
 
