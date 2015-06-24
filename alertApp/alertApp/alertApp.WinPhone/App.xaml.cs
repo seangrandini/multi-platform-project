@@ -7,6 +7,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using alertApp.WinPhone.Resources;
+using Microsoft.Phone.Notification;
+using Microsoft.WindowsAzure.Messaging;
 
 namespace alertApp.WinPhone
 {
@@ -61,7 +63,20 @@ namespace alertApp.WinPhone
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-		}
+            var channel = HttpNotificationChannel.Find("MyPushChannel");
+            if (channel == null)
+            {
+                channel = new HttpNotificationChannel("MyPushChannel");
+                channel.Open();
+                channel.BindToShellToast();
+            }
+
+            channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
+            {
+                var hub = new NotificationHub("alertapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
+                await hub.RegisterNativeAsync(args.ChannelUri.ToString());
+            });
+        }
 
 		// Code to execute when the application is activated (brought to foreground)
 		// This code will not execute when the application is first launched

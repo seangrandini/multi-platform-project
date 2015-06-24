@@ -24,6 +24,7 @@ using WindowsAzure.Messaging;
 
 namespace alertApp.Droid
 {
+
     [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
     [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_MESSAGE },
     Categories = new string[] { "@PACKAGE_NAME@" })]
@@ -120,6 +121,8 @@ namespace alertApp.Droid
             //Set the notification info
             //we use the pending intent, passing our ui intent over which will get called
             //when the notification is tapped.
+            Context context = getApplicationContext();
+
             notification.SetLatestEventInfo(this, title, desc, PendingIntent.GetActivity(this, 0, uiIntent, 0));
 
             //Show the notification
