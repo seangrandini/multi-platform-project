@@ -5,28 +5,30 @@ using System.Text;
 using System.Diagnostics;
 
 using Xamarin.Forms;
+
 namespace alertApp
 {
 	public class App : Application
 	{
 		public App ()
 		{
-			// The root page of your application
-			MainPage = new ContentPage
+            // The root page of your application
+            MainPage = new mainPage();/*
             {
-				Content = new StackLayout
+                
+                Content = new StackLayout
                 {
-					VerticalOptions = LayoutOptions.Center,
-					Children =
+                    VerticalOptions = LayoutOptions.Center,
+                    Children =
                     {
-						new Label
+                        new Label
                         {
 							XAlign = TextAlignment.Center,
 							Text = "Welcome to Xamarin Forms!"
 						}
 					}
 				}
-			};
+            };*/
 		}
 
 		protected override void OnStart ()
@@ -46,5 +48,5 @@ namespace alertApp
             // Handle when your app resumes
             Debug.WriteLine("resume");
         }
-	}
+    }
 }

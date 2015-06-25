@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.WindowsAzure.Messaging;
 
 namespace alertApp.WinPhone
 {
@@ -20,5 +21,8 @@ namespace alertApp.WinPhone
 			global::Xamarin.Forms.Forms.Init ();
 			LoadApplication (new alertApp.App ());
 		}
-	}
+
+    }
+
+   
 }
