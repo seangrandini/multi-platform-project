@@ -8,13 +8,17 @@ using Android.Widget;
 using Android.OS;
 using Android.Util;
 using Gcm.Client;
+using Android.Media;
 
-
+using System.Diagnostics;
 namespace alertApp.Droid
 {
-	[Activity (Label = "alertApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
+
+    [Activity (Label = "alertApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
+
         public static MainActivity instance;
         private void RegisterWithGCM()
         {
@@ -34,7 +38,20 @@ namespace alertApp.Droid
 
             global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new alertApp.App ());
+
             RegisterWithGCM();
+
+        }
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+
+            if (sharedLogic.isPlaying)
+            {
+                System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdddddddddddddddddd");
+                androidAudio.StopSound();
+            }
         }
     }
 }

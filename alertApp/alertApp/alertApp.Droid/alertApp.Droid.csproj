@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="androidAudio.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyBroadcastReceiver.cs" />
@@ -130,6 +131,9 @@
       <Visible>False</Visible>
       <Version>1.0</Version>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Raw\" />
   </ItemGroup>
   <Import Project="..\alertApp\alertApp.projitems" Label="Shared" Condition="Exists('..\alertApp\alertApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

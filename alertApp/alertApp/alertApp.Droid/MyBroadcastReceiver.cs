@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Reflection;
+using System.Resources;
 
 using Android.App;
 using Android.Content;
@@ -12,7 +15,7 @@ using Android.Widget;
 using Android.Util;
 using Gcm.Client;
 using WindowsAzure.Messaging;
-
+using Android.Media;
 
 [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
 [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
@@ -102,6 +105,9 @@ namespace alertApp.Droid
             {
                 createNotification("Unknown message details", msg.ToString());
             }
+            androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+            /*androidAudio.incomingNotification = new androidAudio();
+            androidAudio.incomingNotification.StartPlayer(RingtoneManager.GetDefaultUri(RingtoneType.Ringtone).Path);*/
         }
 
         void createNotification(string title, string desc)
@@ -116,7 +122,7 @@ namespace alertApp.Droid
             .SetContentIntent(myPendingIntent)
             .SetContentTitle(title)
             .SetContentText(desc)
-            .SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)
+            /*.SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)*/
             .SetAutoCancel(true)
             .SetSmallIcon(Android.Resource.Drawable.SymActionEmail);
 
