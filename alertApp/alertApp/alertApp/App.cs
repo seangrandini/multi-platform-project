@@ -11,27 +11,21 @@ namespace alertApp
 	public class App : Application
 	{
 
+        static ItemDatabase database;
+
         public App ()
 		{
             // The root page of your application
-            MainPage = new mainPage();/*
-            {
-                
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children =
-                    {
-                        new Label
-                        {
-							XAlign = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-            };*/
+            MainPage = new mainPage();
+            
 		}
-
+        public static ItemDatabase Database
+        {
+            get
+            {
+                return database;
+            }
+        }
 		protected override void OnStart ()
 		{
             // Handle when your app starts

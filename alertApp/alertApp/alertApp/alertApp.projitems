@@ -11,9 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRingtonePicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ITextToSpeech.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ringtoneList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)sharedLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
   </ItemGroup>
 </Project>

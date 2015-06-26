@@ -14,7 +14,8 @@ namespace alertApp
             Label title = new Label
             {
                Text = "Alarm App",
-               XAlign = TextAlignment.Center,
+               BackgroundColor = Color.Aqua, 
+               XAlign = TextAlignment.Start,
                HorizontalOptions = LayoutOptions.CenterAndExpand
             };
             Button alarmSettingsButton = new Button
@@ -25,9 +26,9 @@ namespace alertApp
             {
                 count++;
                 title.Text = "Alarm App " + count;
-                DependencyService.Get<IRingtonePicker>().RingtonePicker();
-                ringtoneList alarmSettingsPage = new ringtoneList();
-                this.Content = alarmSettingsPage.Content;
+                DependencyService.Get<IActivityInterface>().RingtonePicker();
+                //ringtoneList alarmSettingsPage = new ringtoneList();
+                //this.Content = alarmSettingsPage.Content;
 
             };
             AbsoluteLayout simpleLayout = new AbsoluteLayout

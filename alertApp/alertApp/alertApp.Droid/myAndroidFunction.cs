@@ -16,7 +16,7 @@ namespace alertApp
 {
     class myAndroidFunction
     {
-        public static void androidPicker(/*View arg0*/)
+        /*public static void androidPicker(View arg0)
         {
             Intent intent = new Intent(RingtoneManager.ActionRingtonePicker);
             intent.PutExtra(RingtoneManager.ExtraRingtoneTitle, "Select ringtone for notifications:");
@@ -26,7 +26,7 @@ namespace alertApp
             intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, RingtoneManager.GetDefaultUri(RingtoneType.Alarm));
             Activity activity = new Activity();
             activity.StartActivityForResult(intent, 999);
-        }
+        }*/
         /*public void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
         }*/

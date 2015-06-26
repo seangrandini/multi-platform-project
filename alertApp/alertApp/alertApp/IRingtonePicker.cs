@@ -4,8 +4,9 @@ using System.Text;
 
 namespace alertApp
 {
-    public interface IRingtonePicker
+    public interface IActivityInterface
     {
         void RingtonePicker();
+
     }
 }
