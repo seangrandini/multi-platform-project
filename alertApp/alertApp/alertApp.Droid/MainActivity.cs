@@ -46,12 +46,17 @@ namespace alertApp.Droid
         {
             base.OnResume();
 
-
-            if (sharedLogic.isPlaying)
-            {
-                System.Diagnostics.Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdddddddddddddddddd");
+            if (sharedLogic.isPlaying == 1)
+            {               
                 androidAudio.StopSound();
             }
+            sharedLogic.isPlaying = 2;
+        }
+        protected override void OnPause()
+        {
+            base.OnPause();
+
+            sharedLogic.isPlaying = 0;
         }
     }
 }

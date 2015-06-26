@@ -9,6 +9,9 @@ using Microsoft.Phone.Shell;
 using alertApp.WinPhone.Resources;
 using Microsoft.Phone.Notification;
 using Microsoft.WindowsAzure.Messaging;
+using System.Text;
+using System.ServiceModel;
+using System.Windows.Threading;
 
 namespace alertApp.WinPhone
 {
@@ -66,11 +69,15 @@ namespace alertApp.WinPhone
             var channel = HttpNotificationChannel.Find("MyPushChannel");
             if (channel == null)
             {
-                channel = new HttpNotificationChannel("MyPushChannel");
                 channel.Open();
                 channel.BindToShellToast();
                 channel.BindToShellTile();
             }
+            channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(Channel_ErrorOccurred);
+
+            // Register for this notification only if you need to receive the notifications while your application is running.
+            channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
+
 
             channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
             {
@@ -78,10 +85,43 @@ namespace alertApp.WinPhone
                 await hub.RegisterNativeAsync(args.ChannelUri.ToString());
             });
         }
+        void Channel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
+        {
+            // Error handling logic for your particular application would be here.
+            Dispatcher.BeginInvoke(() =>
+                MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData)));
+        }
+        void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
+        {
+            StringBuilder message = new StringBuilder();
+            string relativeUri = string.Empty;
 
-		// Code to execute when the application is activated (brought to foreground)
-		// This code will not execute when the application is first launched
-		private void Application_Activated(object sender, ActivatedEventArgs e)
+            message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
+
+            // Parse out the information that was part of the message.
+            foreach (string key in e.Collection.Keys)
+            {
+                message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
+
+                if (string.Compare(
+                    key,
+                    "wp:Param",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.CompareOptions.IgnoreCase) == 0)
+                {
+                    relativeUri = e.Collection[key];
+                }
+            }
+
+            // Display a dialog of all the fields in the toast.
+            Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
+
+        }
+
+
+        // Code to execute when the application is activated (brought to foreground)
+        // This code will not execute when the application is first launched
+        private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 		}
 

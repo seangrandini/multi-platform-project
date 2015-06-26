@@ -10,7 +10,8 @@ namespace alertApp
 {
 	public class App : Application
 	{
-		public App ()
+
+        public App ()
 		{
             // The root page of your application
             MainPage = new mainPage();/*

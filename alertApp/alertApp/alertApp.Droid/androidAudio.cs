@@ -18,9 +18,9 @@ namespace alertApp.Droid
         public static MediaPlayer player;
         public static void PlaySound(Context context, Android.Net.Uri uri)
         {
-            if (!sharedLogic.isPlaying)
+            if (sharedLogic.isPlaying != 1)
             { 
-                sharedLogic.isPlaying = true;
+                sharedLogic.isPlaying = 1;
                 player = MediaPlayer.Create(context, uri);
                 player.Start();
             }
@@ -28,7 +28,7 @@ namespace alertApp.Droid
         public static void StopSound()
         {
             player.Stop();
-            sharedLogic.isPlaying = false;
+            sharedLogic.isPlaying = 0;
         }
         /*public static MediaPlayer player;
         public static void StartPlayer(String filePath)

@@ -105,7 +105,10 @@ namespace alertApp.Droid
             {
                 createNotification("Unknown message details", msg.ToString());
             }
-            androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+            if (sharedLogic.isPlaying != 2)
+            {
+                androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+            }
             /*androidAudio.incomingNotification = new androidAudio();
             androidAudio.incomingNotification.StartPlayer(RingtoneManager.GetDefaultUri(RingtoneType.Ringtone).Path);*/
         }

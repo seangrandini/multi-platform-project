@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.WindowsAzure.Messaging;
+using Microsoft.Phone.Notification;
+using System.Text;
 
 namespace alertApp.WinPhone
 {
