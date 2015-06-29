@@ -8,6 +8,7 @@ namespace alertApp
     {
         public static int isPlaying;
         public static Uri defaultSong;
+        public static ItemDatabase database;
         public static void SetDefaultSong(Uri uri)
         {
             

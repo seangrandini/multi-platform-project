@@ -12,7 +12,7 @@ using Android.Widget;
 using Android.Media;
 
 namespace alertApp.Droid
-{
+{   
     class androidAudio
     {
         public static MediaPlayer player;

@@ -14,7 +14,7 @@ using Android.Content;
 using System.Diagnostics;
 namespace alertApp.Droid
 {
-
+        
 
     [Activity(Label = "alertApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
@@ -84,6 +84,7 @@ namespace alertApp.Droid
                         string ringtoneJLO = (string)intent.GetParcelableExtra(RingtoneManager.ExtraRingtonePickedUri);
                         Uri t = new Uri(ringtoneJLO);
                         sharedLogic.defaultSong = t;
+                        sharedLogic.database.SaveItem();
                         //Uri ringtone = (Uri)ringtoneJLO;
 
                         // Toast.makeText(getBaseContext(),RingtoneManager.URI_COLUMN_INDEX,

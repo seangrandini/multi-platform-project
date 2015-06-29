@@ -11,9 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRingtonePicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)settingsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)sharedLogic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)tabbedMainPage.cs" />
   </ItemGroup>
 </Project>

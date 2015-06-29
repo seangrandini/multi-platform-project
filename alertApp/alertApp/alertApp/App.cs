@@ -11,19 +11,18 @@ namespace alertApp
 	public class App : Application
 	{
 
-        static ItemDatabase database;
-
         public App ()
 		{
             // The root page of your application
-            MainPage = new mainPage();
-            
-		}
-        public static ItemDatabase Database
+            sharedLogic.database = new ItemDatabase();
+            MainPage = new tabbedMainPage();
+
+        }
+        public static ItemDatabase Database 
         {
             get
             {
-                return database;
+                return sharedLogic.database;
             }
         }
 		protected override void OnStart ()

@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 
 namespace alertApp.Droid
-{
+{     
     class Constants
     {
         public const string SenderID = "177791980289"; // Google API Project Number

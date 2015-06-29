@@ -33,33 +33,7 @@ namespace alertApp.Droid
             intent.PutExtra(RingtoneManager.ExtraRingtoneShowDefault, true);
             //intent.PutExtra(RingtoneManager.ExtraRingtoneType, 1);
             intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, RingtoneManager.GetDefaultUri(RingtoneType.Alarm));
-            //System.Diagnostics.Debug.WriteLine("qui......................................................................................................................");
-            //((Activity)Forms.Context).
-            /*myActivityClass newActivity = new myActivityClass();
-            newActivity.StartActivityForResult(intent, 0);*/
             ((Activity)Forms.Context).StartActivityForResult(intent, 0);
         }
-        /*protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
-        {
-            base.OnActivityResult(requestCode, resultCode, intent);
-            if (resultCode == Result.Ok)
-            {
-                switch (requestCode)
-                {
-                    case 0:
-                        string ringtoneJLO = (string)intent.GetParcelableExtra(RingtoneManager.ExtraRingtonePickedUri);
-                        Uri t = new Uri(ringtoneJLO);
-                        //Uri ringtone = (Uri)ringtoneJLO;
-
-                        // Toast.makeText(getBaseContext(),RingtoneManager.URI_COLUMN_INDEX,
-                        // Toast.LENGTH_SHORT).show();
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-        }*/
     }
 }
