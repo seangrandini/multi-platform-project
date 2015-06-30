@@ -105,7 +105,6 @@
     <Compile Include="androidVariable.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="myActivityClass.cs" />
     <Compile Include="myAndroidFunction.cs" />
     <Compile Include="MyBroadcastReceiver.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

@@ -10,11 +10,25 @@ namespace alertApp
 {
 	public class App : Application
 	{
-
+        //static ItemDatabase database;
         public App ()
 		{
             // The root page of your application
+            //database = new ItemDatabase();
+            //Item settings = new Item();
             sharedLogic.database = new ItemDatabase();
+            sharedLogic.settings = new Item();
+            if (sharedLogic.database.IsEmpty())
+            {
+                sharedLogic.settings = new Item();
+                sharedLogic.settings.ID = 1;
+                sharedLogic.settings.Name = "settings";
+                sharedLogic.settings.defaultUri = "";
+                sharedLogic.database.SaveItem(sharedLogic.settings);
+            }
+            //sharedLogic.settings.defaultUri = sharedLogic.database.GetItem(1).defaultUri;
+            sharedLogic.settings.setSettingsFromItem(sharedLogic.database.GetItem(1));
+            sharedLogic.defaultSong = sharedLogic.settings.defaultUri;
             MainPage = new tabbedMainPage();
 
         }

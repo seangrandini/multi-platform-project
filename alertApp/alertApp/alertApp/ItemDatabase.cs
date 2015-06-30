@@ -65,11 +65,18 @@ namespace alertApp
         {
             lock (locker)
             {
-                if (item.ID != 0)
+                if (IsEmpty() == false)
                 {
-                    database.Update(item);
-                    return item.ID;
-
+                    Item existTest = this.GetItem(item.ID);
+                    if (existTest != null)
+                    {
+                        database.Update(item);
+                        return item.ID;
+                    }
+                    else
+                    {
+                        return database.Insert(item);
+                    }
                 }
                 else
                 {
@@ -84,6 +91,18 @@ namespace alertApp
             {
                 return database.Delete<Item>(id);
             }
+        }
+        public bool IsEmpty()
+        {
+            if (database.Table<Item>().Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

@@ -10,6 +10,7 @@ using Android.Util;
 using Gcm.Client;
 using Android.Media;
 
+using Android.Net;
 using Android.Content;
 using System.Diagnostics;
 namespace alertApp.Droid
@@ -82,13 +83,12 @@ namespace alertApp.Droid
                 {
                     case 0:
                         string ringtoneJLO = (string)intent.GetParcelableExtra(RingtoneManager.ExtraRingtonePickedUri);
-                        Uri t = new Uri(ringtoneJLO);
-                        sharedLogic.defaultSong = t;
-                        sharedLogic.database.SaveItem();
-                        //Uri ringtone = (Uri)ringtoneJLO;
-
-                        // Toast.makeText(getBaseContext(),RingtoneManager.URI_COLUMN_INDEX,
-                        // Toast.LENGTH_SHORT).show();
+                        //Android.Net.Uri t = (Android.Net.Uri)ringtoneJLO;
+                        sharedLogic.defaultSong = "";
+                        sharedLogic.defaultSong = ringtoneJLO;
+                        sharedLogic.settings.setSettingsFromItem(sharedLogic.database.GetItem(1));
+                        sharedLogic.settings.defaultUri = sharedLogic.defaultSong;
+                        sharedLogic.database.SaveItem(sharedLogic.settings);
                         break;
 
                     default:

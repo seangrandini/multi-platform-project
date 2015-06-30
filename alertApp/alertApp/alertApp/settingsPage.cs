@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Xamarin.Forms;
-
+using Android.Media;
 namespace alertApp
 {
     class settingsPage : ContentPage
@@ -18,19 +18,23 @@ namespace alertApp
             };
             Label alarmLabel = new Label
             {
-                Text = "Alarm song:",
+                Text = "Change default alarm",
                 YAlign = TextAlignment.Center,
                 FontSize = 14
             };
-            Label alarmSong = new Label
+            /*Label alarmSong = new Label
             {
                 Text = "",
-                FontSize = 14
+                FontSize = 14,
+                YAlign = TextAlignment.Center
 
             };
+            alarmSong.Text = sharedLogic.getDefaultSongNameAndroid();*/
+
             Button alarmButton = new Button
             {
-                Text = "Change"
+                Text = "Change",
+                
             };
             alarmButton.Clicked += (sender, args) =>
             {
@@ -47,7 +51,7 @@ namespace alertApp
                 TranslationX = 30
             };
             alarmSongSetting.Children.Add(alarmLabel);
-            alarmSongSetting.Children.Add(alarmSong);
+            //alarmSongSetting.Children.Add(alarmSong);
             alarmSongSetting.Children.Add(alarmButton);
 
             Label notificationTitle = new Label

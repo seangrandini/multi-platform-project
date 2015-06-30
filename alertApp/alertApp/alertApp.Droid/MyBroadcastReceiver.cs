@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Resources;
 
+using Android.Net;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -107,7 +108,16 @@ namespace alertApp.Droid
             }
             if (sharedLogic.isPlaying != 2)
             {
-                androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+                
+                if (sharedLogic.defaultSong != "")
+                {
+                    androidAudio.PlaySound(this, sharedLogic.getDefaultSongUriAndroid());
+                    //song = Android.Net.Uri.Builder;
+                }
+                else
+                {
+                    androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+                }
             }
             /*androidAudio.incomingNotification = new androidAudio();
             androidAudio.incomingNotification.StartPlayer(RingtoneManager.GetDefaultUri(RingtoneType.Ringtone).Path);*/
@@ -134,28 +144,6 @@ namespace alertApp.Droid
             NotificationManager myNotificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
 
             myNotificationManager.Notify(1, myNotification);
-
-            /*//Create notification
-            var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
-
-            //Create an intent to show ui
-            var uiIntent = new Intent(this, typeof(MainActivity));
-
-            //Create the notification
-            var notification = new Notification(Android.Resource.Drawable.SymActionEmail, title);
-
-            //Auto cancel will remove the notification once the user touches it
-            notification.Flags = NotificationFlags.AutoCancel;
-
-            //Set the notification info
-            //we use the pending intent, passing our ui intent over which will get called
-            //when the notification is tapped.
-
-            notification.SetLatestEventInfo(this, title, desc, PendingIntent.GetActivity(this, 0, uiIntent, 0));
-
-            //Show the notification
-            notificationManager.Notify(1, notification);
-            dialogNotify(title, desc);*/
         }
 
         protected void dialogNotify(String title, String message)

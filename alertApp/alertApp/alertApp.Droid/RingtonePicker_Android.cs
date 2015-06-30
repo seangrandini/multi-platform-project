@@ -31,8 +31,8 @@ namespace alertApp.Droid
             intent.PutExtra(RingtoneManager.ExtraRingtoneTitle, "Select ringtone for notifications:");
             intent.PutExtra(RingtoneManager.ExtraRingtoneShowSilent, false);
             intent.PutExtra(RingtoneManager.ExtraRingtoneShowDefault, true);
-            //intent.PutExtra(RingtoneManager.ExtraRingtoneType, 1);
-            intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, RingtoneManager.GetDefaultUri(RingtoneType.Alarm));
+            intent.PutExtra(RingtoneManager.ExtraRingtoneType, "TYPE_ALL");
+            intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, sharedLogic.getDefaultSongUriAndroid());
             ((Activity)Forms.Context).StartActivityForResult(intent, 0);
         }
     }
