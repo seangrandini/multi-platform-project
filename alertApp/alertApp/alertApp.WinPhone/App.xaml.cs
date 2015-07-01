@@ -11,8 +11,14 @@ using Microsoft.Phone.Notification;
 using Microsoft.WindowsAzure.Messaging;
 using System.Text;
 using System.ServiceModel;
-using System.Windows.Threading;
 
+using System.Windows.Media;
+
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows.Controls;
 namespace alertApp.WinPhone
 {
 	public partial class App : Application
@@ -66,63 +72,52 @@ namespace alertApp.WinPhone
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-            var channel = HttpNotificationChannel.Find("MyPushChannel");
-            if (channel == null)
-            {
-                channel = new HttpNotificationChannel("MyPushChannel");
-                channel.Open();
-                channel.BindToShellToast();
-                channel.BindToShellTile();
-            }
-            //channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(Channel_ErrorOccurred);
+			var channel = HttpNotificationChannel.Find("MyPushChannel");
+			if (channel == null)
+			{
+				channel = new HttpNotificationChannel("MyPushChannel");
+				channel.Open();
+				channel.BindToShellToast();
+				channel.BindToShellTile();
+			}
 
-            // Register for this notification only if you need to receive the notifications while your application is running.
-            //channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
+			channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
+			{
+				var hub = new NotificationHub("alarmapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
+				await hub.RegisterNativeAsync(args.ChannelUri.ToString());
+			});
+			channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
+		}
+		void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
+		{
+			StringBuilder message = new StringBuilder();
+			string relativeUri = string.Empty;
 
-
-            channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
-            {
-                var hub = new NotificationHub("alarmapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
-                await hub.RegisterNativeAsync(args.ChannelUri.ToString());
-            });
-        }
-        void Channel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
-        {
-            // Error handling logic for your particular application would be here.
-            /*Dispatcher.BeginInvoke(() =>
-                MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData)));*/
-        }
-        void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
-        {
-            StringBuilder message = new StringBuilder();
-            string relativeUri = string.Empty;
-
-            message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
-
-            // Parse out the information that was part of the message.
-            foreach (string key in e.Collection.Keys)
-            {
-                message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
-
+			message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
+			
+			// Parse out the information that was part of the message.
+			foreach (string key in e.Collection.Keys)
+			{
+				//message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
+				message.AppendFormat("{0}\n", e.Collection[key]);
                 if (string.Compare(
-                    key,
-                    "wp:Param",
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    System.Globalization.CompareOptions.IgnoreCase) == 0)
-                {
-                    relativeUri = e.Collection[key];
-                }
-            }
+					key,
+					"wp:Param",
+					System.Globalization.CultureInfo.InvariantCulture,
+					System.Globalization.CompareOptions.IgnoreCase) == 0)
+				{
+					relativeUri = e.Collection[key];
+				}
+			}
 
-            // Display a dialog of all the fields in the toast.
-            //Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
+			// Display a dialog of all the fields in the toast.
+			MainPage.questo.Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
+			//MessageBox.Show(message.ToString());
 
-        }
-
-
-        // Code to execute when the application is activated (brought to foreground)
-        // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+		}
+		// Code to execute when the application is activated (brought to foreground)
+		// This code will not execute when the application is first launched
+		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 		}
 
