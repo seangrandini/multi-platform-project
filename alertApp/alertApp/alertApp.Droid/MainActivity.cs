@@ -23,7 +23,7 @@ namespace alertApp.Droid
     {
         public static Timer timer;
         public static DateTime lastDateTime;
-        public static int timeOut = 30000;
+        public static int timeOut = 600000;
         public static NetworkStateReceiver receiver = new NetworkStateReceiver();
 
         public static MainActivity instance;

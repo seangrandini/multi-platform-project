@@ -21,23 +21,7 @@ namespace alertApp
             Item settings = new Item();
             sharedLogic.database = new ItemDatabase();
             sharedLogic.settings = new Item();
-#if __ANDROID__
-            if (sharedLogic.database.IsEmpty())
-            {
-                sharedLogic.settings = new Item();
-                sharedLogic.settings.ID = 1;
-                sharedLogic.settings.Name = "settings";
-                sharedLogic.settings.setUriAsProperty(RingtoneManager.GetDefaultUri(RingtoneType.Alarm));
-                sharedLogic.database.SaveItem(sharedLogic.settings);
-            }
-            //sharedLogic.settings.defaultUri = sharedLogic.database.GetItem(1).defaultUri;
-            sharedLogic.settings.setSettingsFromItem(sharedLogic.database.GetItem(1));
-            sharedLogic.defaultSong = sharedLogic.settings.derivateUri();
-            if (sharedLogic.defaultSong == null)
-            {
-                sharedLogic.defaultSong = RingtoneManager.GetDefaultUri(RingtoneType.Alarm);
-            }
-#endif
+            DependencyService.Get<IActivityInterface>().DatabaseConstructor();
             MainPage = new tabbedMainPage();
 
         }

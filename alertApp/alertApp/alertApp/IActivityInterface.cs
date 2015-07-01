@@ -7,6 +7,6 @@ namespace alertApp
     public interface IActivityInterface
     {
         void RingtonePicker();
-
+        void DatabaseConstructor();
     }
 }

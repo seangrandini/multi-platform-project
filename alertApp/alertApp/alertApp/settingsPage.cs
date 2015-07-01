@@ -30,7 +30,7 @@ namespace alertApp
             {
                 Text = "Change default alarm",
                 YAlign = TextAlignment.Center,
-                FontSize = 14,
+                FontSize = 18,
                 TranslationX= 15,
                 
             };
@@ -58,7 +58,7 @@ namespace alertApp
             {
                 Text = "Delete All notification",
                 YAlign = TextAlignment.Center,
-                FontSize = 14
+                FontSize = 18
             };
             Button notificationDeleteButton = new Button
             {
@@ -88,6 +88,19 @@ namespace alertApp
             notificationDeleteSetting.Children.Add(notificationDeleteLabel);
             notificationDeleteSetting.Children.Add(notificationDeleteButton);
 
+            StackLayout prova1 = new StackLayout
+            {
+                Padding = 0,
+            };
+
+            Button prova = new Button
+            {
+                Text = "prova",
+
+            };
+
+            prova1.Children.Add(prova);
+
             this.Content = new ScrollView
             {
                 Content = new StackLayout
@@ -98,7 +111,8 @@ namespace alertApp
                         alarmTitle,
                         alarmSongSetting,
                         notificationTitle,
-                        notificationDeleteSetting
+                        notificationDeleteSetting,
+                        prova1,
 
                     }
                 }
