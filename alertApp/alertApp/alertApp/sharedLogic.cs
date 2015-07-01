@@ -3,52 +3,37 @@ using System.Collections.Generic;
 using System.Text;
 
 using Xamarin.Forms;
+#if __ANDROID__
 using Android.Media;
+#endif
 namespace alertApp
 {
     class sharedLogic
     {
         public static int isPlaying;
-        public static string defaultSong;
+        //public static string defaultSong;
         public static Item settings;
         public static ItemDatabase database;
-        public static string getDefaultSongNameAndroid()
+
+#if __ANDROID__
+        public static Android.Net.Uri defaultSong;
+
+        public static Android.Net.Uri.Builder uriToBuilderAndroid(Android.Net.Uri ring)
         {
-            if (defaultSong != "")
-            {
-                Android.Net.Uri.Builder builder = new Android.Net.Uri.Builder();
-                builder.Path(sharedLogic.defaultSong);
-                Android.Net.Uri songa = builder.Build();
-                Ringtone ringtone = RingtoneManager.GetRingtone(Forms.Context, songa);
-                String songName = ringtone.GetTitle(Forms.Context);
-                return songName;
-            }
-            else
-            {
-                return "Default";
-            }
+            Android.Net.Uri.Builder builder = new Android.Net.Uri.Builder();
+            builder.Authority(ring.Authority);
+            builder.EncodedAuthority(ring.EncodedAuthority);
+            builder.EncodedFragment(ring.EncodedFragment);
+            builder.EncodedPath(ring.EncodedPath);
+            builder.EncodedQuery(ring.EncodedQuery);
+            builder.Fragment(ring.Fragment);
+            builder.Path(ring.Path);
+            builder.Query(ring.Query);
+            builder.Scheme(ring.Scheme);
+
+            return builder;
         }
-        public static Android.Net.Uri getDefaultSongUriAndroid()
-        {
-            if (defaultSong != "")
-            {
-                Android.Net.Uri.Builder builder = new Android.Net.Uri.Builder();
-                builder.Path(sharedLogic.defaultSong);
-                Android.Net.Uri songa = builder.Build();
-                return songa;
-            }
-            else
-            {
-                return RingtoneManager.GetDefaultUri(RingtoneType.Ringtone);
-            }
-        }
+#endif
+
     }
-    //class ringtone
-    //{
-    //    private Uri uri;
-    //    public ringtone(Uri uri)
-    //    {
-    //        this.uri = uri;
-    //    }
-    //}
 }

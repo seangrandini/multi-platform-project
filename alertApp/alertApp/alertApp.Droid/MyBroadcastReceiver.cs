@@ -109,9 +109,9 @@ namespace alertApp.Droid
             if (sharedLogic.isPlaying != 2)
             {
                 
-                if (sharedLogic.defaultSong != "")
+                if (sharedLogic.defaultSong != null)
                 {
-                    androidAudio.PlaySound(this, sharedLogic.getDefaultSongUriAndroid());
+                    androidAudio.PlaySound(this, sharedLogic.defaultSong);
                     //song = Android.Net.Uri.Builder;
                 }
                 else

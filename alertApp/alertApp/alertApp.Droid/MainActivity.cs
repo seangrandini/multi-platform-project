@@ -82,12 +82,10 @@ namespace alertApp.Droid
                 switch (requestCode)
                 {
                     case 0:
-                        string ringtoneJLO = (string)intent.GetParcelableExtra(RingtoneManager.ExtraRingtonePickedUri);
-                        //Android.Net.Uri t = (Android.Net.Uri)ringtoneJLO;
-                        sharedLogic.defaultSong = "";
-                        sharedLogic.defaultSong = ringtoneJLO;
+                        Android.Net.Uri ring = (Android.Net.Uri)intent.GetParcelableExtra(RingtoneManager.ExtraRingtonePickedUri);
+                        sharedLogic.defaultSong = sharedLogic.uriToBuilderAndroid(ring).Build();
                         sharedLogic.settings.setSettingsFromItem(sharedLogic.database.GetItem(1));
-                        sharedLogic.settings.defaultUri = sharedLogic.defaultSong;
+                        sharedLogic.settings.setUriAsProperty(ring);
                         sharedLogic.database.SaveItem(sharedLogic.settings);
                         break;
 

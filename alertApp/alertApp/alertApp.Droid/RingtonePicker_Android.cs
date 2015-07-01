@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+using Android.Net;
 using alertApp.Droid;
 using Android.Media;
 using Xamarin.Forms;
@@ -32,7 +33,7 @@ namespace alertApp.Droid
             intent.PutExtra(RingtoneManager.ExtraRingtoneShowSilent, false);
             intent.PutExtra(RingtoneManager.ExtraRingtoneShowDefault, true);
             intent.PutExtra(RingtoneManager.ExtraRingtoneType, "TYPE_ALL");
-            intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, sharedLogic.getDefaultSongUriAndroid());
+            intent.PutExtra(RingtoneManager.ExtraRingtoneExistingUri, sharedLogic.defaultSong);
             ((Activity)Forms.Context).StartActivityForResult(intent, 0);
         }
     }

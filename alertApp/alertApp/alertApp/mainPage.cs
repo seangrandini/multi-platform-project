@@ -31,14 +31,14 @@ namespace alertApp
                 FontSize = 20
             };
 
-            Image settingsButton = new Image
-            {
-                Source = ImageSource.FromFile("settingsIcon_black"),
-                HeightRequest = 60,
-                WidthRequest = 50,
-                TranslationX = 5
+            //Image settingsButton = new Image
+            //{
+            //    Source = ImageSource.FromFile("settingsIcon_black"),
+            //    HeightRequest = 60,
+            //    WidthRequest = 50,
+            //    TranslationX = 5
 
-            };
+            //};
             /*settingsButton.GestureRecognizers.Add(new TapGestureRecognizer(sender =>
             {
                 Navigation.PushAsync(new settingsPage());

@@ -1,5 +1,4 @@
 ﻿using alertApp.WinPhone.Resources;
-
 namespace alertApp.WinPhone
 {
 	/// <summary>
@@ -10,5 +9,5 @@ namespace alertApp.WinPhone
 		private static AppResources _localizedResources = new AppResources();
 
 		public AppResources LocalizedResources { get { return _localizedResources; } }
-	}
+    }
 }

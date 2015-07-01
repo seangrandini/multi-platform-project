@@ -88,8 +88,8 @@ namespace alertApp.WinPhone
         void Channel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
         {
             // Error handling logic for your particular application would be here.
-            Dispatcher.BeginInvoke(() =>
-                MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData)));
+            /*Dispatcher.BeginInvoke(() =>
+                MessageBox.Show(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData)));*/
         }
         void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
@@ -114,7 +114,7 @@ namespace alertApp.WinPhone
             }
 
             // Display a dialog of all the fields in the toast.
-            Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
+            //Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
 
         }
 

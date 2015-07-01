@@ -4,13 +4,23 @@ using System.Collections.Generic;
 using System.Text;
 
 using Xamarin.Forms;
-using Android.Media;
 namespace alertApp
 {
     class settingsPage : ContentPage
     {
         public settingsPage()
         {
+            Button alarmButton = new Button
+            {
+                Text = "Change",
+                TranslationX = 0,
+                
+            };
+            alarmButton.Clicked += (sender, args) =>
+            {
+                DependencyService.Get<IActivityInterface>().RingtonePicker();
+            };
+
             Label alarmTitle = new Label
             {
                 Text = "Alarm settings",
@@ -20,25 +30,9 @@ namespace alertApp
             {
                 Text = "Change default alarm",
                 YAlign = TextAlignment.Center,
-                FontSize = 14
-            };
-            /*Label alarmSong = new Label
-            {
-                Text = "",
                 FontSize = 14,
-                YAlign = TextAlignment.Center
-
-            };
-            alarmSong.Text = sharedLogic.getDefaultSongNameAndroid();*/
-
-            Button alarmButton = new Button
-            {
-                Text = "Change",
+                TranslationX= 15,
                 
-            };
-            alarmButton.Clicked += (sender, args) =>
-            {
-                DependencyService.Get<IActivityInterface>().RingtonePicker();
             };
 
             StackLayout alarmSongSetting = new StackLayout
@@ -48,11 +42,10 @@ namespace alertApp
                 VerticalOptions = LayoutOptions.Start,
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.Fill,
-                TranslationX = 30
             };
-            alarmSongSetting.Children.Add(alarmLabel);
-            //alarmSongSetting.Children.Add(alarmSong);
             alarmSongSetting.Children.Add(alarmButton);
+            //alarmSongSetting.Children.Add(alarmSong);
+            alarmSongSetting.Children.Add(alarmLabel);
 
             Label notificationTitle = new Label
             {
@@ -69,18 +62,29 @@ namespace alertApp
             };
             Button notificationDeleteButton = new Button
             {
-                Text = "Delete"
+                Text = "Delete",
+                TranslationX = -20,
+                
             };
 
-            StackLayout notificationDeleteSetting = new StackLayout
+            AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
             {
-                Spacing = 0,
                 Padding = 0,
                 VerticalOptions = LayoutOptions.Start,
-                Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.Fill,
-                TranslationX = 30
             };
+            AbsoluteLayout.SetLayoutFlags(notificationDeleteButton,
+                AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(notificationDeleteButton,
+                new Rectangle(1f,
+                    0f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+
+            AbsoluteLayout.SetLayoutFlags(notificationDeleteLabel,
+            AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(notificationDeleteLabel,
+                new Rectangle(0f,
+                    0.5f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+
             notificationDeleteSetting.Children.Add(notificationDeleteLabel);
             notificationDeleteSetting.Children.Add(notificationDeleteButton);
 
