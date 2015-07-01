@@ -15,6 +15,7 @@ namespace alertApp.WinPhone
 {
 	public partial class MainPage : global::Xamarin.Forms.Platform.WinPhone.FormsApplicationPage
 	{
+		public static MainPage questo = new MainPage();
 		public MainPage ()
 		{
 			InitializeComponent ();
@@ -22,9 +23,9 @@ namespace alertApp.WinPhone
 
 			global::Xamarin.Forms.Forms.Init ();
 			LoadApplication (new alertApp.App ());
+			questo = this;
 		}
+	}
 
-    }
 
-   
 }
