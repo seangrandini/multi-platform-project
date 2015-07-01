@@ -166,6 +166,20 @@ namespace alertApp.Droid
             Log.Verbose(MyBroadcastReceiver.TAG, "GCM Unregistered: " + registrationId);
 
             createNotification("GCM Unregistered...", "The device has been unregistered!");
+
+            if (sharedLogic.isPlaying != 2)
+            {
+
+                if (sharedLogic.defaultSong != null)
+                {
+                    androidAudio.PlaySound(this, sharedLogic.defaultSong);
+                    //song = Android.Net.Uri.Builder;
+                }
+                else
+                {
+                    androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+                }
+            }
         }
 
         protected override bool OnRecoverableError(Context context, string errorId)

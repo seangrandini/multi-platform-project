@@ -4,6 +4,11 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using SQLite;
+#if __ANDROID__
+#elif __IOS__
+#else
+using Windows.Storage;
+#endif
 
 namespace alertApp
 {

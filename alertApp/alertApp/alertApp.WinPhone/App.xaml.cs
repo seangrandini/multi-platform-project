@@ -69,6 +69,7 @@ namespace alertApp.WinPhone
             var channel = HttpNotificationChannel.Find("MyPushChannel");
             if (channel == null)
             {
+                channel = new HttpNotificationChannel("MyPushChannel");
                 channel.Open();
                 channel.BindToShellToast();
                 channel.BindToShellTile();

@@ -13,13 +13,18 @@ using Android.Media;
 using Android.Net;
 using Android.Content;
 using System.Diagnostics;
+using System.Timers;
+
 namespace alertApp.Droid
 {
-        
 
     [Activity(Label = "alertApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
+        public static Timer timer;
+        public static DateTime lastDateTime;
+        public static int timeOut = 30000;
+        public static NetworkStateReceiver receiver = new NetworkStateReceiver();
 
         public static MainActivity instance;
         private void RegisterWithGCM()
@@ -34,9 +39,11 @@ namespace alertApp.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+
             instance = this;
 
             base.OnCreate(bundle);
+
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new alertApp.App());
@@ -45,7 +52,11 @@ namespace alertApp.Droid
 
             androidVariable.currentActivity = this;
 
-
+            timer = new Timer(timeOut);
+            timer.Elapsed += onTimeOut;
+            timer.AutoReset = true;
+            timer.Enabled = true;
+            
         }
         protected override void OnResume()
         {
@@ -96,6 +107,15 @@ namespace alertApp.Droid
 
         }
 
+        public void onTimeOut(Object source, ElapsedEventArgs e)
+        {
+            checkConnection();
+        }
+
+        public void checkConnection()
+        {
+            receiver.OnReceive(this, this.Intent);
+        }
 
     }
 }

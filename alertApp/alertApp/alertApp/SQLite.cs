@@ -23,7 +23,7 @@
 #define USE_CSHARP_SQLITE
 #endif
 
-#if NETFX_CORE    
+#if NETFX_CORE
 #define USE_NEW_REFLECTION_API
 #endif
 
