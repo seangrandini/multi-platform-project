@@ -74,10 +74,10 @@ namespace alertApp.WinPhone
                 channel.BindToShellToast();
                 channel.BindToShellTile();
             }
-            channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(Channel_ErrorOccurred);
+            //channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(Channel_ErrorOccurred);
 
             // Register for this notification only if you need to receive the notifications while your application is running.
-            channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
+            //channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
 
 
             channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
