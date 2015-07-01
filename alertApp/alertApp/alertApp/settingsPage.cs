@@ -64,6 +64,8 @@ namespace alertApp
             {
                 Text = "Delete",
                 TranslationX = -20,
+
+
                 
             };
 
