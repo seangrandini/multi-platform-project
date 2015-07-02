@@ -14,7 +14,8 @@ using System.ServiceModel;
 
 using System.Windows.Media;
 
-
+using System.IO.IsolatedStorage;
+using System.Windows.Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,8 +35,10 @@ namespace alertApp.WinPhone
 		/// </summary>
 		public App()
 		{
-			// Global handler for uncaught exceptions.
-			UnhandledException += Application_UnhandledException;
+            // Copy media to isolated storage.
+            CopyToIsolatedStorage();
+            // Global handler for uncaught exceptions.
+            UnhandledException += Application_UnhandledException;
 
 			// Standard XAML initialization
 			InitializeComponent();
@@ -112,25 +115,29 @@ namespace alertApp.WinPhone
 
 			// Display a dialog of all the fields in the toast.
 			MainPage.questo.Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
-			//MessageBox.Show(message.ToString());
-
-		}
-		// Code to execute when the application is activated (brought to foreground)
-		// This code will not execute when the application is first launched
-		private void Application_Activated(object sender, ActivatedEventArgs e)
+            MainPage.questoBgPlayer.Play();
+            //MessageBox.Show(message.ToString());
+            // Copy media to isolated storage.
+        }
+    // Code to execute when the application is activated (brought to foreground)
+    // This code will not execute when the application is first launched
+        private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
+
 		}
 
 		// Code to execute when the application is deactivated (sent to background)
 		// This code will not execute when the application is closing
 		private void Application_Deactivated(object sender, DeactivatedEventArgs e)
 		{
+
 		}
 
 		// Code to execute when the application is closing (eg, user hit Back)
 		// This code will not execute when the application is deactivated
 		private void Application_Closing(object sender, ClosingEventArgs e)
 		{
+
 		}
 
 		// Code to execute if a navigation fails
@@ -271,5 +278,34 @@ namespace alertApp.WinPhone
 				throw;
 			}
 		}
-	}
+        private void CopyToIsolatedStorage()
+        {
+            using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                string[] files = new string[] { "Kick in Rock.mp3", "Nokia - Attraction.mp3", "Nokia - Badinerie.mp3" , "Nokia - City Bird.mp3", "Nokia - Frog.mp3", "Nokia - Hurdy Gurdy.mp3", "Nokia - Intro.mp3", "Nokia - Jumping.mp3", "Nokia - Kick.mp3", "Nokia - Knick Knack.mp3", "Nokia - Lamb.mp3", "Nokia - Low.mp3", "Nokia - Merry Xmas.mp3", "Nokia - Orient.mp3", "Nokia - Ring Ring.mp3", "Nokia - Robo N1X.mp3", "Nokia - Rocket.mp3", "Nokia - Thats It.mp3", "Nokia - The Buffoon.mp3", "Nokia - Tick Tick.mp3", "Nokia Tune 2013.mp3", "Nokia Tune V2.mp3", "Nokia Tune V3.mp3" };
+
+                foreach (var _fileName in files)
+                {
+                    if (!storage.FileExists(_fileName))
+                    {
+                        string _filePath = "Audio/" + _fileName;
+                        StreamResourceInfo resource = Application.GetResourceStream(new Uri(_filePath, UriKind.Relative));
+
+                        using (IsolatedStorageFileStream file = storage.CreateFile(_fileName))
+                        {
+                            int chunkSize = 4096;
+                            byte[] bytes = new byte[chunkSize];
+                            int byteCount;
+
+                            while ((byteCount = resource.Stream.Read(bytes, 0, chunkSize)) > 0)
+                            {
+                                file.Write(bytes, 0, byteCount);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 }
