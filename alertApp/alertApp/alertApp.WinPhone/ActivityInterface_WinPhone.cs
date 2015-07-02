@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 using Windows.Phone.Media;
 using alertApp.WinPhone;
+using Microsoft.Phone.Shell;
+using Windows.System;
+
 
 [assembly: Xamarin.Forms.Dependency(typeof(ActivityInterface_WinPhone))]
 
@@ -15,12 +18,14 @@ namespace alertApp.WinPhone
     {
         public ActivityInterface_WinPhone() { }
 
-        public void RingtonePicker()
+        public async void RingtonePicker()
         {
-            
-        }
+			bool result = await Launcher.LaunchUriAsync(new Uri("ms-settings-notifications:"));
 
-        public void DatabaseConstructor()
+
+		}
+
+		public void DatabaseConstructor()
         {
             System.Diagnostics.Debug.WriteLine("aaaaaa");
         }

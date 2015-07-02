@@ -20,6 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows.Controls;
+
+using System.Threading;
+
 namespace alertApp.WinPhone
 {
 	public partial class App : Application
@@ -90,12 +93,13 @@ namespace alertApp.WinPhone
 				await hub.RegisterNativeAsync(args.ChannelUri.ToString());
 			});
 			channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
+			MainPage.questoBgPlayer.SkipNext();
 		}
 		void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
 		{
 			StringBuilder message = new StringBuilder();
 			string relativeUri = string.Empty;
-
+			
 			message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
 			
 			// Parse out the information that was part of the message.
@@ -115,13 +119,87 @@ namespace alertApp.WinPhone
 
 			// Display a dialog of all the fields in the toast.
 			MainPage.questo.Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
-            MainPage.questoBgPlayer.Play();
             //MessageBox.Show(message.ToString());
             // Copy media to isolated storage.
-        }
-    // Code to execute when the application is activated (brought to foreground)
-    // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+		}
+
+		// Set the minimum version number that supports custom toast sounds
+		private static Version TargetVersion = new Version(8, 0, 10492);
+
+		// Function to determine if the current device is running the target version.
+		public static bool IsTargetedVersion { get { return Environment.OSVersion.Version >= TargetVersion; } }
+
+		// Function for setting a property value using reflection.
+		private static void SetProperty(object instance, string name, object value)
+		{
+			var setMethod = instance.GetType().GetProperty(name).GetSetMethod();
+			setMethod.Invoke(instance, new object[] { value });
+		}
+
+		public void ShowToast(bool useCustomSound, bool useWavFormat, bool doSilentToast)
+		{
+			ShellToast toast = new ShellToast();
+			toast.Title = "[title]";
+			toast.Content = "[content]";
+
+			//If the device is running the right version and a custom sound is requested
+			if ((IsTargetedVersion) && (useCustomSound))
+			{
+				if (useWavFormat)
+				{
+					//Do the reflection to get the new Sound property added to the toast
+					SetProperty(toast, "Sound", new Uri("MyToastSound.wav", UriKind.RelativeOrAbsolute));
+				}
+				else
+				{
+					//Do the reflection to get the new Sound property added to the toast
+					//SetProperty(toast, "Sound", new Uri("MyToastSound.mp3", UriKind.RelativeOrAbsolute));
+					SetProperty(toast, "Sound", new Uri("Kick in Rock.mp3", UriKind.RelativeOrAbsolute));
+				}
+			}
+			// For a silent toast, check the version and then set the Sound property to an empty string.
+			else if ((IsTargetedVersion) && (doSilentToast))
+			{
+				//Do the reflection to get the new Sound property added to the toast
+				SetProperty(toast, "Sound", new Uri("", UriKind.RelativeOrAbsolute));
+			}
+
+
+			toast.Show();
+		}
+
+		public void ShowToastWithCloudService(bool useCustomSound, bool useWavFormat, bool doSilentToast)
+		{
+			StringBuilder toastMessage = new StringBuilder();
+			toastMessage.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?><wp:Notification xmlns:wp=\"WPNotification\"><wp:Toast>");
+			toastMessage.Append("<wp:Text1>Toast Title</wp:Text1>");
+			toastMessage.Append("<wp:Text2>Toast Content</wp:Text2>");
+			if ((IsTargetedVersion) && (useCustomSound))
+			{
+				if (useWavFormat)
+				{
+					toastMessage.Append("<wp:Sound>MyToastSound.wav</wp:Sound>");
+				}
+				else
+				{
+					//toastMessage.Append("<wp:Sound>MyToastSound.mp3</wp:Sound>");
+					toastMessage.Append("<wp:Sound>Audio/Kick in Rock.mp3</wp:Sound>");
+				}
+			}
+			else if ((IsTargetedVersion) && (doSilentToast))
+			{
+				toastMessage.Append("<wp:Sound Silent=\"true\"/>");
+			}
+			toastMessage.Append("</wp:Toast></wp:Notification>");
+		}
+
+
+
+
+
+		// Code to execute when the application is activated (brought to foreground)
+		// This code will not execute when the application is first launched
+		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 
 		}
@@ -130,14 +208,12 @@ namespace alertApp.WinPhone
 		// This code will not execute when the application is closing
 		private void Application_Deactivated(object sender, DeactivatedEventArgs e)
 		{
-
 		}
 
 		// Code to execute when the application is closing (eg, user hit Back)
 		// This code will not execute when the application is deactivated
 		private void Application_Closing(object sender, ClosingEventArgs e)
 		{
-
 		}
 
 		// Code to execute if a navigation fails
