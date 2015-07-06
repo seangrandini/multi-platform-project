@@ -11,9 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IActivityInterface.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotificationHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notifica.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ringtone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ringtoneCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RingtoneListPage.cs" />
@@ -21,7 +22,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ringtonesPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)settingsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)sharedLogic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\notification\NotificationItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\notification\NotificationItemDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\settings\Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\settings\ItemDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SQLite\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)tabbedMainPage.cs" />
   </ItemGroup>
 </Project>

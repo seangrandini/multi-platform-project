@@ -71,9 +71,6 @@ namespace alertApp
             {
                 Text = "Delete",
                 TranslationX = -20,
-
-
-
             };
 
             AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout

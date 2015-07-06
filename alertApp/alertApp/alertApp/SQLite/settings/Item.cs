@@ -15,6 +15,8 @@ namespace alertApp
         public int ID { get; set; }   
         public string Name { get; set; }
 
+		public int notificationSaveNumber { get; set; };
+
         public string Authority { get; set; }
         public string EncodedAuthority { get; set; }
         public string EncodedFragment { get; set; }
@@ -33,6 +35,8 @@ namespace alertApp
         {
             this.ID = item.ID;
             this.Name = item.Name;
+			this.notificationSaveNumber = item.notificationSaveNumber;
+
             this.Authority = item.Authority;
             this.EncodedAuthority = item.EncodedAuthority;
             this.EncodedFragment = item.EncodedFragment;

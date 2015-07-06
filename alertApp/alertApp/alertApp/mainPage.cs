@@ -44,30 +44,12 @@ namespace alertApp
                 Navigation.PushAsync(new settingsPage());
             }));*/
 
+
             ListView notificationList = new ListView
             {
-                RowHeight = 100
             };
-            notificationList.ItemsSource = new string[]
-                {
-                    "aaaa",
-                    "bbbb",
-                    "cccc",
-                    "dddd",
-                    "eeee",
-                    "aaaa",
-                    "bbbb",
-                    "cccc",
-                    "dddd",
-                    "aaaa",
-                    "bbbb",
-                    "cccc",
-                    "dddd",
-                    "aaaa",
-                    "bbbb",
-                    "cccc",
-                    "dddd"
-                };
+			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
+			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
 
             StackLayout header = new StackLayout
             {

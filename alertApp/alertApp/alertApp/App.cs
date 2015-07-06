@@ -21,9 +21,37 @@ namespace alertApp
             // The root page of your application
             sharedLogic.database = new ItemDatabase();
             Item settings = new Item();
+
+			sharedLogic.notificationDatabase = new NotificationItemDatabase();
+			NotificationItem singleNotification = new NotificationItem();
+
+			sharedLogic.notificationDatabase = new NotificationItemDatabase();
+
             sharedLogic.database = new ItemDatabase();
             sharedLogic.settings = new Item();
+
+			if (sharedLogic.notificationDatabase.IsEmpty())
+			{
+				singleNotification.ID = 1;
+				singleNotification.Title = "0 notification";
+				singleNotification.Text = "";
+				singleNotification.Name = "notification";
+				sharedLogic.notificationDatabase.SaveItem(singleNotification);
+				sharedLogic.notifications.Append(singleNotification.Title, singleNotification.Text);
+			}
+			else
+			{
+				sharedLogic.notifications = new NotificationHistory();
+				for (int i = 1; i <= sharedLogic.notificationDatabase.length(); i++)
+				{
+					singleNotification = sharedLogic.notificationDatabase.GetItem(i);
+					sharedLogic.notifications.Append(singleNotification.Title, singleNotification.Text);
+					System.Diagnostics.Debug.WriteLine(sharedLogic.notifications.notifactionList[i-1].Title);
+				}
+			}
+
             DependencyService.Get<IActivityInterface>().DatabaseConstructor();
+
             MainPage = new NavigationPage (new tabbedMainPage());
 
         }

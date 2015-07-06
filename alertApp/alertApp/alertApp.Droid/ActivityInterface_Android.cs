@@ -44,6 +44,7 @@ namespace alertApp.Droid
                 sharedLogic.settings = new Item();
                 sharedLogic.settings.ID = 1;
                 sharedLogic.settings.Name = "settings";
+				sharedLogic.settings.notificationSaveNumber = 20;
                 sharedLogic.settings.setUriAsProperty(RingtoneManager.GetDefaultUri(RingtoneType.Alarm));
                 sharedLogic.database.SaveItem(sharedLogic.settings);
             }
@@ -54,6 +55,7 @@ namespace alertApp.Droid
             {
                 sharedLogic.defaultSong = RingtoneManager.GetDefaultUri(RingtoneType.Alarm);
             }
+			sharedLogic.notificationSaveNumber = sharedLogic.settings.notificationSaveNumber;
         }
     }
 }

@@ -11,10 +11,15 @@ namespace alertApp
     class sharedLogic
     {
         public static int isPlaying;
-        //public static string defaultSong;
+
         public static Item settings;
         public static ItemDatabase database;
 
+		//public static NotificationItem singleNotification;
+		public static NotificationItemDatabase notificationDatabase;
+
+		public static int notificationSaveNumber;
+		public static NotificationHistory notifications = new NotificationHistory();
 #if __ANDROID__
         public static Android.Net.Uri defaultSong;
 

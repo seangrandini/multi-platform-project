@@ -102,6 +102,22 @@ namespace alertApp.Droid
             if (!string.IsNullOrEmpty(messageText))
             {
                 createNotification(messageTitle, messageText);
+
+				Notifica singleNotification = new Notifica(messageTitle, messageText);
+				sharedLogic.notifications.Append(singleNotification);
+				NotificationItem notifItem = new NotificationItem();
+				if (sharedLogic.notifications.notifactionList[0].Text != "")
+				{
+					notifItem.ID = sharedLogic.notifications.notificationNumber;
+				}
+				else
+				{
+					notifItem.ID = 1;
+				}
+				notifItem.Name = "notification";
+				notifItem.Title = messageTitle;
+				notifItem.Text = messageText;
+				sharedLogic.notificationDatabase.SaveItem(notifItem);
             }
             else
             {
@@ -120,8 +136,7 @@ namespace alertApp.Droid
                     androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
                 }
             }
-            /*androidAudio.incomingNotification = new androidAudio();
-            androidAudio.incomingNotification.StartPlayer(RingtoneManager.GetDefaultUri(RingtoneType.Ringtone).Path);*/
+            
         }
 
         void createNotification(string title, string desc)
