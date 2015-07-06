@@ -98,9 +98,10 @@ namespace alertApp.Droid
             }
 
             string messageText = intent.Extras.GetString("message");
+            string messageTitle = intent.Extras.GetString("title");
             if (!string.IsNullOrEmpty(messageText))
             {
-                createNotification("New hub message!", messageText);
+                createNotification(messageTitle, messageText);
             }
             else
             {

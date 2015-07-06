@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows.Controls;
+using MyAudioPlaybackAgent;
 namespace alertApp.WinPhone
 {
 	public partial class App : Application
@@ -37,6 +38,7 @@ namespace alertApp.WinPhone
 		{
             // Copy media to isolated storage.
             CopyToIsolatedStorage();
+
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -53,7 +55,7 @@ namespace alertApp.WinPhone
 			if (Debugger.IsAttached)
 			{
 				// Display the current frame rate counters.
-				Application.Current.Host.Settings.EnableFrameRateCounter = true;
+				//Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
 				// Show the areas of the app that are being redrawn in each frame.
 				//Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -90,7 +92,9 @@ namespace alertApp.WinPhone
 				await hub.RegisterNativeAsync(args.ChannelUri.ToString());
 			});
 			channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
-		}
+
+            
+        }
 		void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
 		{
 			StringBuilder message = new StringBuilder();
@@ -123,15 +127,15 @@ namespace alertApp.WinPhone
     // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
-
+            
 		}
 
 		// Code to execute when the application is deactivated (sent to background)
 		// This code will not execute when the application is closing
 		private void Application_Deactivated(object sender, DeactivatedEventArgs e)
 		{
-
-		}
+            
+        }
 
 		// Code to execute when the application is closing (eg, user hit Back)
 		// This code will not execute when the application is deactivated
@@ -282,7 +286,7 @@ namespace alertApp.WinPhone
         {
             using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                string[] files = new string[] { "Kick in Rock.mp3", "Nokia - Attraction.mp3", "Nokia - Badinerie.mp3" , "Nokia - City Bird.mp3", "Nokia - Frog.mp3", "Nokia - Hurdy Gurdy.mp3", "Nokia - Intro.mp3", "Nokia - Jumping.mp3", "Nokia - Kick.mp3", "Nokia - Knick Knack.mp3", "Nokia - Lamb.mp3", "Nokia - Low.mp3", "Nokia - Merry Xmas.mp3", "Nokia - Orient.mp3", "Nokia - Ring Ring.mp3", "Nokia - Robo N1X.mp3", "Nokia - Rocket.mp3", "Nokia - Thats It.mp3", "Nokia - The Buffoon.mp3", "Nokia - Tick Tick.mp3", "Nokia Tune 2013.mp3", "Nokia Tune V2.mp3", "Nokia Tune V3.mp3" };
+                string[] files = new string[] { "86502^alarm.wav", "Kick in Rock.mp3", "Nokia - Attraction.mp3", "Nokia - Badinerie.mp3" , "Nokia - City Bird.mp3", "Nokia - Frog.mp3", "Nokia - Hurdy Gurdy.mp3", "Nokia - Intro.mp3", "Nokia - Jumping.mp3", "Nokia - Kick.mp3", "Nokia - Knick Knack.mp3", "Nokia - Lamb.mp3", "Nokia - Low.mp3", "Nokia - Merry Xmas.mp3", "Nokia - Orient.mp3", "Nokia - Ring Ring.mp3", "Nokia - Robo N1X.mp3", "Nokia - Rocket.mp3", "Nokia - Thats It.mp3", "Nokia - The Buffoon.mp3", "Nokia - Tick Tick.mp3", "Nokia Tune 2013.mp3", "Nokia Tune V2.mp3", "Nokia Tune V3.mp3" };
 
                 foreach (var _fileName in files)
                 {

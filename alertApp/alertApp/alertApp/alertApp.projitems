@@ -14,6 +14,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ringtone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ringtoneCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RingtoneListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ringtonesGigi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ringtonesPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)settingsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)sharedLogic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />

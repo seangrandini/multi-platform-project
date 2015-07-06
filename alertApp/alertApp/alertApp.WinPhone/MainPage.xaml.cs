@@ -10,8 +10,14 @@ using Microsoft.Phone.Shell;
 using Microsoft.WindowsAzure.Messaging;
 using Microsoft.Phone.Notification;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+
 
 using Microsoft.Phone.BackgroundAudio;
+using MyAudioPlaybackAgent;
+using System.IO;
+using Microsoft.Phone.Media;
 
 namespace alertApp.WinPhone
 {
@@ -30,8 +36,15 @@ namespace alertApp.WinPhone
 			LoadApplication (new alertApp.App ());
 			questo = this;
 
-            questoBgPlayer = BackgroundAudioPlayer.Instance;
-            BackgroundAudioPlayer.Instance.PlayStateChanged += new EventHandler(Instance_PlayStateChanged);
+            //questoBgPlayer = BackgroundAudioPlayer.Instance;
+
+            //AudioPlayer abba = new AudioPlayer();
+            //abba.PlayTrack(MainPage.questoBgPlayer);
+            //BackgroundAudioPlayer.Instance.PlayStateChanged += new EventHandler(Instance_PlayStateChanged);
+            BackgroundAudioPlayer.Instance.Track = new AudioTrack(new Uri("Audio/Kick in Rock.mp3"), "", "", "", null);
+            BackgroundAudioPlayer.Instance.Play();
+
+
         }
         void Instance_PlayStateChanged(object sender, EventArgs e)
         {
