@@ -77,6 +77,7 @@ namespace alertApp
 					if (existTest != null)
 					{
 						database.Update(item);
+						//database.Insert(item);
 						return item.ID;
 					}
 					else
@@ -98,6 +99,17 @@ namespace alertApp
 				return database.Delete<NotificationItem>(id);
 			}
 		}
+		public void DeleteAllItems()
+		{
+			lock (locker)
+			{
+				int itemNumber = length();
+				for (int i = 1; i <= itemNumber; i++)
+				{
+					database.Delete<NotificationItem>(i);
+				}
+			}
+		}
 		public bool IsEmpty()
 		{
 			if (database.Table<NotificationItem>().Count() == 0)
@@ -112,7 +124,20 @@ namespace alertApp
 		}
 		public int length()
 		{
+			int aaa = database.Table<NotificationItem>().Count();
 			return database.Table<NotificationItem>().Count();
 		}
+
+		public void MoveAllDown()
+		{
+			NotificationItem notificationItem = new NotificationItem();
+			int itemNumber = length();
+			for (int i = 1; i < itemNumber; i++)
+			{
+				notificationItem = GetItem(i + 1);
+				notificationItem.ID = i;
+				SaveItem(notificationItem);
+			}
+        }
 	}
 }

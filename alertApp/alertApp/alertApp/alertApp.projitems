@@ -12,9 +12,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IActivityInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NotificationCell.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NotificationHistory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Notifica.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)notification\Notifica.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)notification\NotificationCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)notification\NotificationHistory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ringtone.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ringtoneCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RingtoneListPage.cs" />

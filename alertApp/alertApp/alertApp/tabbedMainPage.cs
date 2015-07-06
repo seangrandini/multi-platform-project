@@ -9,14 +9,17 @@ namespace alertApp
     {
         public tabbedMainPage(string s)
         {
-            this.Children.Add(new settingsPage(s) { Title = "Settings" });
+			NavigationPage.SetHasNavigationBar(this, false);
+			this.Children.Add(new settingsPage(s) { Title = "Settings" });
             this.Children.Add(new mainPage() { Title = "Home" });
-            
-        }
+
+		}
         public tabbedMainPage()
         {
-            this.Children.Add(new mainPage() { Title = "Home" });
+			NavigationPage.SetHasNavigationBar(this, false);
+			mainPage myMainPage = new mainPage() { Title = "Home" };
+            this.Children.Add(myMainPage);
             this.Children.Add(new settingsPage() { Title = "Settings" });
-        }
+		}
     }
 }

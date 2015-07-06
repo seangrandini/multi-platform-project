@@ -39,20 +39,21 @@ namespace alertApp.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
-
-            instance = this;
-
-            base.OnCreate(bundle);
+			instance = this;
 
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+			base.OnCreate(bundle);
+
+			global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new alertApp.App());
 
-            RegisterWithGCM();
+			RegisterWithGCM();
 
             androidVariable.currentActivity = this;
 
-            timer = new Timer(timeOut);
+			checkConnection();
+
+			timer = new Timer(timeOut);
             timer.Elapsed += onTimeOut;
             timer.AutoReset = true;
             timer.Enabled = true;

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:icon="@drawable/Icon"></application>
+	<application android:label="progel osm alerting">
+  </application>
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

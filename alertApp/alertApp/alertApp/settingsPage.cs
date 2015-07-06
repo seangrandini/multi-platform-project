@@ -10,7 +10,7 @@ namespace alertApp
     {
         public settingsPage(string s)
         {
-            Button alarmButton = new Button
+			Button alarmButton = new Button
             {
                 Text = "Change",
                 TranslationX = 0,
@@ -72,8 +72,12 @@ namespace alertApp
                 Text = "Delete",
                 TranslationX = -20,
             };
+			notificationDeleteButton.Clicked += (sender, args) =>
+			{
+				sharedLogic.notifications.Clear();
+			};
 
-            AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
+				AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
             {
                 Padding = 0,
                 VerticalOptions = LayoutOptions.Start,
@@ -126,7 +130,7 @@ namespace alertApp
         }
         public settingsPage()
         {
-            Button alarmButton = new Button
+			Button alarmButton = new Button
             {
                 Text = "Change",
                 TranslationX = 0,
@@ -188,11 +192,13 @@ namespace alertApp
                 Text = "Delete",
                 TranslationX = -20,
 
-
-
             };
+			notificationDeleteButton.Clicked += (sender, args) =>
+			{
+				sharedLogic.notifications.Clear();
+			};
 
-            AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
+			AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
             {
                 Padding = 0,
                 VerticalOptions = LayoutOptions.Start,

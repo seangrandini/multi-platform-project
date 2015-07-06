@@ -15,7 +15,7 @@ namespace alertApp
         public int ID { get; set; }   
         public string Name { get; set; }
 
-		public int notificationSaveNumber { get; set; };
+		public int notificationSaveNumber { get; set; }
 
         public string Authority { get; set; }
         public string EncodedAuthority { get; set; }
