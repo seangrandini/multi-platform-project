@@ -67,8 +67,7 @@ namespace alertApp.WinPhone
                                        BackgroundAudioPlayer.Instance.Track.Artist;*/
             }
         }
-
-    }
+	}
 
 
 
