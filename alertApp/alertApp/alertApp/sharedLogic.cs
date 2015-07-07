@@ -22,7 +22,9 @@ namespace alertApp
 
 		public static void UpDateListView()
 		{
-
+			mainPage.notificationList.Unfocus();
+			mainPage.notificationList.Focus();
+			//mainPage.notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 		}
 		public static void UpDateInternetStatus(int tempInternetStatus)
 		{

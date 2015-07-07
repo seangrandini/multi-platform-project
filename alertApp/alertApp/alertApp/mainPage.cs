@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace alertApp
 {
@@ -56,7 +57,7 @@ namespace alertApp
 				HasUnevenRows = true
 
             };
-			
+
 			//notificationList.SetBinding(ListView.ItemsSourceProperty, "sharedLogic.notifications.notifactionList");
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
