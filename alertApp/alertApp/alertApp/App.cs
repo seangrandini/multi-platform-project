@@ -29,6 +29,7 @@ namespace alertApp
 
 			sharedLogic.notifications = new NotificationHistory();
             sharedLogic.notifications.LoadFromDatabase();
+			
 
 			NavigationPage navigationPage = new NavigationPage(new tabbedMainPage());
 			MainPage = navigationPage;

@@ -60,6 +60,15 @@ namespace alertApp
 			//notificationList.SetBinding(ListView.ItemsSourceProperty, "sharedLogic.notifications.notifactionList");
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
+			notificationList.ItemSelected += async (sender, e) =>
+			{
+				if (e.SelectedItem == null) return;
+				var notifica = (Notifica)e.SelectedItem;
+				await Navigation.PushAsync(new MoreDetailsPage(notifica));
+				//notificationList.ClearValue(ListView.SelectedItemProperty);
+				notificationList.SelectedItem = null;
+				
+			};
 			if (sharedLogic.notifications.notificationNumber > 0)
 			{
 				notificationList.ScrollTo(sharedLogic.notifications.notifactionList[sharedLogic.notifications.notificationNumber - 1], ScrollToPosition.End, false);

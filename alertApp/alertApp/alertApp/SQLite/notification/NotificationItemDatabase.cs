@@ -139,5 +139,25 @@ namespace alertApp
 				SaveItem(notificationItem);
 			}
         }
+
+		public void DeleteAt(int Index)
+		{
+			NotificationItem notificationItem = new NotificationItem();
+			int itemNumber = length();
+			for (int i = Index; i <= itemNumber; i++)
+			{
+				if (i != itemNumber)
+				{
+					notificationItem = GetItem(i + 1);
+					notificationItem.ID = i;
+					SaveItem(notificationItem);
+				}
+				else
+				{
+					DeleteItem(i);
+				}
+			}
+			
+		}
 	}
 }

@@ -16,7 +16,7 @@ namespace alertApp
 				VerticalOptions = LayoutOptions.Start,
 				FontSize = 20
 			};
-			Title.SetBinding(Label.TextProperty, "Title");
+			Title.SetBinding(Label.TextProperty, "TitlePreview");
 
 			var Text = new Label
 			{
@@ -24,7 +24,7 @@ namespace alertApp
 				VerticalOptions = LayoutOptions.End,
 				FontSize = 16
 			};
-			Text.SetBinding(Label.TextProperty, "Text");
+			Text.SetBinding(Label.TextProperty, "TextPreview");
 
 			var Data = new Label
 			{
