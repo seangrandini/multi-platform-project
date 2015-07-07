@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IActivityInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)mainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)notification\MoreDetailsPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)notification\Notifica.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)notification\NotificationCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)notification\NotificationHistory.cs" />

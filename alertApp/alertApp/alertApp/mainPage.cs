@@ -51,8 +51,13 @@ namespace alertApp
 
 			notificationList = new ListView
 			{
-				RowHeight = 100
+				//MinimumHeightRequest = 200,
+				//HeightRequest = 80
+				HasUnevenRows = true
+
             };
+			
+			//notificationList.SetBinding(ListView.ItemsSourceProperty, "sharedLogic.notifications.notifactionList");
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
 			if (sharedLogic.notifications.notificationNumber > 0)
@@ -82,7 +87,7 @@ namespace alertApp
 			footer = new StackLayout
 			{
 				Spacing = 0,
-				Padding = 0,
+				Padding = 10,
 				VerticalOptions = LayoutOptions.End,
 				Orientation = StackOrientation.Vertical,
 				HorizontalOptions = LayoutOptions.Fill,
