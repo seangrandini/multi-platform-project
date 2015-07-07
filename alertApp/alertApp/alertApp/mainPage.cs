@@ -8,9 +8,14 @@ namespace alertApp
 {
     class mainPage : ContentPage
     {
-        public mainPage()
+		public static Label status;
+
+		public static ListView notificationList;
+
+		public static StackLayout footer;
+		public mainPage()
         {
-            Label title = new Label
+			Label title = new Label
             {
                 Text = "AlarmApp",
                 XAlign = TextAlignment.Center,
@@ -21,35 +26,39 @@ namespace alertApp
                 TranslationX = 30
             };
 
-            Label status = new Label
+            status = new Label
             {
                 Text = "Status:",
                 TextColor = Color.White,
                 XAlign = TextAlignment.Center,
                 YAlign = TextAlignment.Center,
                 VerticalOptions = LayoutOptions.Center,
-                FontSize = 20
+				HorizontalOptions = LayoutOptions.Center,
+                FontSize = 16
             };
-
-            //Image settingsButton = new Image
-            //{
-            //    Source = ImageSource.FromFile("settingsIcon_black"),
-            //    HeightRequest = 60,
-            //    WidthRequest = 50,
-            //    TranslationX = 5
-
-            //};
-            /*settingsButton.GestureRecognizers.Add(new TapGestureRecognizer(sender =>
-            {
-                Navigation.PushAsync(new settingsPage());
-            }));*/
+			/*if (sharedLogic.internetStatus != null)
+			{
+				if (sharedLogic.internetStatus == 0)
+				{
+					status.Text = "Status: Disconnected " + DateTime.Now;
+				}
+				else if (sharedLogic.internetStatus == 1)
+				{
+					status.Text = "Status: Connected " + DateTime.Now;
+				}
+			}*/
 
 
-            ListView notificationList = new ListView
-            {
+			notificationList = new ListView
+			{
+				RowHeight = 100
             };
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
+			if (sharedLogic.notifications.notificationNumber > 0)
+			{
+				notificationList.ScrollTo(sharedLogic.notifications.notifactionList[sharedLogic.notifications.notificationNumber - 1], ScrollToPosition.End, false);
+			}
 
             StackLayout header = new StackLayout
             {
@@ -59,43 +68,27 @@ namespace alertApp
                 WidthRequest = 0
             };
 
-            /*if (Device.OS == TargetPlatform.Android)
-            {
-                header = new StackLayout
-                {
-                    Spacing = 0,
-                    VerticalOptions = LayoutOptions.Start,
-                    Orientation = StackOrientation.Horizontal,
-                    HorizontalOptions = LayoutOptions.Fill,
-                    //BackgroundColor = Color.White,
-                    HeightRequest = 70,
-                    //Padding = new Thickness(10)
-                };
-                header.Children.Add(settingsButton);
-                header.Children.Add(title);
-            }*/
 
             StackLayout content = new StackLayout
             {
                 Spacing = 0,
                 Padding = 0,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                Orientation = StackOrientation.Vertical,
+                Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                //BackgroundColor = Color.White
             };
             content.Children.Add(notificationList);
-            //content.Children.Add(new Button() {Text="prova" });
 
-            StackLayout footer = new StackLayout
-            {
-                Spacing = 0,
-                Padding = 0,
-                VerticalOptions = LayoutOptions.End,
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.Fill,
-                BackgroundColor = Color.FromRgb(106, 196, 49),
-                HeightRequest = 30
+			footer = new StackLayout
+			{
+				Spacing = 0,
+				Padding = 0,
+				VerticalOptions = LayoutOptions.End,
+				Orientation = StackOrientation.Vertical,
+				HorizontalOptions = LayoutOptions.Fill,
+				BackgroundColor = Color.FromRgb(106, 196, 49),
+				//HeightRequest = 30
+				MinimumHeightRequest = 30
             };
             footer.Children.Add(status);
 
@@ -103,15 +96,9 @@ namespace alertApp
             {
                 Spacing = 0,
                 Padding = 0,
-                /*#if __ANDROID__
-                                BackgroundColor = Color.White,
-                #endif*/
                 Children =
                 {
                     header,
-                    /*#if __ANDROID__
-                                        new Shadow5px(),
-                    #endif*/
                     content,
                     footer,
                 }

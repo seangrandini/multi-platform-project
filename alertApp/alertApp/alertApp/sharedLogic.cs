@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+using alertApp;
 using Xamarin.Forms;
 #if __ANDROID__
 using Android.Media;
@@ -11,15 +12,36 @@ namespace alertApp
     class sharedLogic
     {
         public static int isPlaying;
+		public static int internetStatus;
 
         public static Item settings;
         public static ItemDatabase database;
 
-		//public static NotificationItem singleNotification;
-		public static NotificationItemDatabase notificationDatabase;
-
 		public static int notificationSaveNumber;
-		public static NotificationHistory notifications = new NotificationHistory();
+		public static NotificationHistory notifications;
+
+		public static void UpDateListView()
+		{
+			mainPage.notificationList.ItemsSource = null;
+			mainPage.notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
+		}
+		public static void UpDateInternetStatus(int tempInternetStatus)
+		{
+			sharedLogic.internetStatus = tempInternetStatus;
+			if (sharedLogic.internetStatus != null)
+			{
+				if (sharedLogic.internetStatus == 0)
+				{
+					mainPage.status.Text = "Status: Disconnected " + DateTime.Now;
+					mainPage.footer.BackgroundColor = Color.FromRgb(255,0,0);
+				}
+				else if (sharedLogic.internetStatus == 1)
+				{
+					mainPage.status.Text = "Status: Connected " + DateTime.Now;
+					mainPage.footer.BackgroundColor = Color.FromRgb(106, 196, 49);
+				}
+			}
+		}
 #if __ANDROID__
         public static Android.Net.Uri defaultSong;
 

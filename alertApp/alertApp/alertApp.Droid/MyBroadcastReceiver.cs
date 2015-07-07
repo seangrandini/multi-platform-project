@@ -103,39 +103,29 @@ namespace alertApp.Droid
             {
                 createNotification(messageTitle, messageText);
 
-				Notifica singleNotification = new Notifica(messageTitle, messageText);
-				sharedLogic.notifications.Append(singleNotification);
-				NotificationItem notifItem = new NotificationItem();
-				if (sharedLogic.notifications.notifactionList[0].Text != "")
+				sharedLogic.notifications.Append(messageTitle, messageText);
+				/*if (sharedLogic.isPlaying == 2)
 				{
-					notifItem.ID = sharedLogic.notifications.notificationNumber;
-				}
-				else
-				{
-					notifItem.ID = 1;
-				}
-				notifItem.Name = "notification";
-				notifItem.Title = messageTitle;
-				notifItem.Text = messageText;
-				sharedLogic.notificationDatabase.SaveItem(notifItem);
+					sharedLogic.UpDateListView();
+                }*/
             }
             else
             {
                 createNotification("Unknown message details", msg.ToString());
             }
-            if (sharedLogic.isPlaying != 2)
-            {
-                
-                if (sharedLogic.defaultSong != null)
-                {
-                    androidAudio.PlaySound(this, sharedLogic.defaultSong);
-                    //song = Android.Net.Uri.Builder;
-                }
-                else
-                {
-                    androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
-                }
-            }
+			if (sharedLogic.isPlaying != 2)
+			{
+
+				if (sharedLogic.defaultSong != null)
+				{
+					androidAudio.PlaySound(this, sharedLogic.defaultSong);
+					//song = Android.Net.Uri.Builder;
+				}
+				else
+				{
+					androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+				}
+			}
             
         }
 
