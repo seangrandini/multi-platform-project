@@ -11,128 +11,138 @@ namespace alertApp
         public settingsPage(string s)
         {
 			Button alarmButton = new Button
-            {
-                Text = "Change",
-                TranslationX = 0,
+			{
+				Text = "Change default alarm",
 
-            };
-            alarmButton.Clicked += (sender, args) =>
-            {
-                if (Device.OS != TargetPlatform.WinPhone)
-                {
-                    DependencyService.Get<IActivityInterface>().RingtonePicker();
-                }
-                else
-                {
-                    Navigation.PushAsync(new ringtonesPage());
-                }
-            };
+			};
+			alarmButton.Clicked += (sender, args) =>
+			{
+				if (Device.OS != TargetPlatform.WinPhone)
+				{
+					DependencyService.Get<IActivityInterface>().RingtonePicker();
+				}
+				else
+				{
+					Navigation.PushAsync(new ringtonesPage());
+				}
+			};
 
-            Label alarmTitle = new Label
-            {
-                Text = "Alarm settings",
-                FontSize = 24
-            };
-            Label alarmLabel = new Label
-            {
-                Text = s,
-                YAlign = TextAlignment.Center,
-                FontSize = 18,
-                TranslationX = 15,
+			Label alarmLabel = new Label
+			{
+				Text = s,
+				YAlign = TextAlignment.Center,
+				FontSize = 18,
+				TranslationX = 15,
 
-            };
-
-            StackLayout alarmSongSetting = new StackLayout
-            {
-                Spacing = 0,
-                Padding = 0,
-                VerticalOptions = LayoutOptions.Start,
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.Fill,
-            };
-            alarmSongSetting.Children.Add(alarmButton);
-            //alarmSongSetting.Children.Add(alarmSong);
-            alarmSongSetting.Children.Add(alarmLabel);
-
-            Label notificationTitle = new Label
-            {
-                Text = "Notification settings",
-                FontSize = 24,
+			};
 
 
-            };
-            Label notificationDeleteLabel = new Label
-            {
-                Text = "Delete All notification",
-                YAlign = TextAlignment.Center,
-                FontSize = 18
-            };
+			Label alarmTitle = new Label
+			{
+				Text = "Alarm settings",
+				FontSize = 24
+			};
+
+			Label notificationTitle = new Label
+			{
+				Text = "Notification Settings",
+				FontSize = 24
+			};
+
 			Button notificationDeleteButton = new Button
 			{
-				Text = "Delete",
-				TranslationX = -20,
+				Text = "Delete All notification",
 			};
 			notificationDeleteButton.Clicked += async (sender, args) =>
 			{
 				var answer = await DisplayAlert("Warning", "Notification history will be deleted, are you sure?", "Yes", "No");
+				System.Diagnostics.Debug.WriteLine("Answer: " + answer);
 				if (answer)
 				{
 					sharedLogic.notifications.Clear();
 				}
-				//sharedLogic.notifications.Clear();
 			};
 
-				AbsoluteLayout notificationDeleteSetting = new AbsoluteLayout
-            {
-                Padding = 0,
-                VerticalOptions = LayoutOptions.Start,
-                HorizontalOptions = LayoutOptions.Fill,
-            };
-            AbsoluteLayout.SetLayoutFlags(notificationDeleteButton,
-                AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(notificationDeleteButton,
-                new Rectangle(1f,
-                    0f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+			Label notificationMaxNumberLabel = new Label
+			{
+				Text = "Max notification number:",
+				FontSize = 16
+			};
+			Entry notificationMaxNumberEntry = new Entry
+			{
+				Text = sharedLogic.settings.notificationSaveNumber.ToString()
+			};
+			Button notificationMaxNumberButton = new Button
+			{
+				Text = "Apply"
+			};
+			notificationMaxNumberButton.Clicked += (sender, e) =>
+			{
+				try
+				{
+					sharedLogic.settings.notificationSaveNumber = Convert.ToInt32(notificationMaxNumberEntry.Text);
+					sharedLogic.database.SaveItem(sharedLogic.settings);
+					sharedLogic.notificationSaveNumber = sharedLogic.settings.notificationSaveNumber;
+					DisplayAlert("Info", "Now you can store " + sharedLogic.notificationSaveNumber + " notifications", "OK");
+				}
+				catch
+				{
+					DisplayAlert("Warning", "Insert only whole numbers", "OK");
+					notificationMaxNumberEntry.Text = sharedLogic.notificationSaveNumber.ToString();
+				}
+			};
 
-            AbsoluteLayout.SetLayoutFlags(notificationDeleteLabel,
-            AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(notificationDeleteLabel,
-                new Rectangle(0f,
-                    0.5f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+			StackLayout notificationMaxNumberSettings = new StackLayout
+			{
+				Padding = 0,
+				Spacing = 0,
+				Orientation = StackOrientation.Vertical,
+				Children =
+				{
+					notificationMaxNumberLabel,
+					notificationMaxNumberEntry,
+					notificationMaxNumberButton
+				}
+			};
 
-            notificationDeleteSetting.Children.Add(notificationDeleteLabel);
-            notificationDeleteSetting.Children.Add(notificationDeleteButton);
+			StackLayout alarmSettings = new StackLayout
+			{
+				Padding = 0,
+				Spacing = 0,
+				Children =
+				{
+					alarmButton,
+					alarmLabel
+				}
+			};
 
-            StackLayout prova1 = new StackLayout
-            {
-                Padding = 0,
-            };
+			StackLayout notificationSettings = new StackLayout
+			{
+				Padding = 0,
+				Spacing = 0,
+				Children =
+				{
+					notificationDeleteButton,
+					notificationMaxNumberSettings
+				}
+			};
 
-            Button prova = new Button
-            {
-                Text = "prova",
-
-            };
-
-            prova1.Children.Add(prova);
-
-            this.Content = new ScrollView
-            {
-                Content = new StackLayout
-                {
-                    TranslationX = 10,
-                    Children =
-                    {
-                        alarmTitle,
-                        alarmSongSetting,
-                        notificationTitle,
-                        notificationDeleteSetting,
-                        prova1,
-
-                    }
-                }
-            };
-        }
+			this.Content = new ScrollView
+			{
+				Content = new StackLayout
+				{
+					Padding = 10,
+					Spacing = 10,
+					Children =
+					{
+						alarmTitle,
+						alarmSettings,
+						notificationTitle,
+						notificationSettings
+					}
+				}
+			};
+		}
         public settingsPage()
         {
 			Button alarmButton = new Button

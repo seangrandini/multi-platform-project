@@ -54,7 +54,7 @@ namespace alertApp
 			{
 				HasUnevenRows = true
             };
-			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
+			notificationList.ItemsSource = sharedLogic.notifications.reverseNotificationList;
 			notificationList.BindingContext = sharedLogic.notifications;
 			notificationList.SetBinding(ListView.ItemsSourceProperty, "reverseNotificationList");
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
