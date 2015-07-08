@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Xamarin.Forms;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 namespace alertApp
 {
-    class Notifica
-    {
+    class Notifica : INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged;
 		public string Title { get; set; }
 		public string Text { get; set; }
 		public string Data { get; set; }
@@ -50,6 +55,15 @@ namespace alertApp
 			else
 			{
 				this.TitlePreview = "No title";
+			}
+			OnPropertyChanged();
+        }
+		void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			var handler = PropertyChanged;
+			if (handler != null)
+			{
+				handler(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

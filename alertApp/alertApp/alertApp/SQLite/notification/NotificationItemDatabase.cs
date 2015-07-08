@@ -135,8 +135,15 @@ namespace alertApp
 			for (int i = 1; i < itemNumber; i++)
 			{
 				notificationItem = GetItem(i + 1);
-				notificationItem.ID = i;
-				SaveItem(notificationItem);
+				if (notificationItem != null)
+				{
+					notificationItem.ID = i;
+					SaveItem(notificationItem);
+				}
+				else
+				{
+					database.Delete<NotificationItem>(i);
+				}
 			}
         }
 
@@ -154,10 +161,25 @@ namespace alertApp
 				}
 				else
 				{
-					DeleteItem(i);
+					database.Delete<NotificationItem>(i);
 				}
 			}
 			
+		}
+		public int CheckForNull()
+		{
+			NotificationItem notificationItem = new NotificationItem();
+			int itemNumber = length();
+			int returnValue = -1;
+			for (int i = 1; i <= itemNumber; i++)
+			{
+				notificationItem = GetItem(i);
+				if (notificationItem == null)
+				{
+					returnValue = i;
+				}
+			}
+			return returnValue;
 		}
 	}
 }

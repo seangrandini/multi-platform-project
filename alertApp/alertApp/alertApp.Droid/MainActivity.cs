@@ -14,6 +14,7 @@ using Android.Net;
 using Android.Content;
 using System.Diagnostics;
 using System.Timers;
+using Android.Telephony;
 
 namespace alertApp.Droid
 {
@@ -117,7 +118,11 @@ namespace alertApp.Droid
         {
             receiver.OnReceive(this, this.Intent);
         }
+		public bool CallStatus()
+		{
+			TelephonyManager tm = (TelephonyManager)this.GetSystemService(Context.TelephonyService);
+        }
 
-    }
+	}
 }
 

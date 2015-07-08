@@ -57,9 +57,9 @@ namespace alertApp
 				HasUnevenRows = true
 
             };
-
-			//notificationList.SetBinding(ListView.ItemsSourceProperty, "sharedLogic.notifications.notifactionList");
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
+			notificationList.BindingContext = sharedLogic.notifications;
+			notificationList.SetBinding(ListView.ItemsSourceProperty, "notifactionList");
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
 			notificationList.ItemSelected += async (sender, e) =>
 			{
@@ -67,8 +67,7 @@ namespace alertApp
 				var notifica = (Notifica)e.SelectedItem;
 				await Navigation.PushAsync(new MoreDetailsPage(notifica));
 				//notificationList.ClearValue(ListView.SelectedItemProperty);
-				notificationList.SelectedItem = null;
-				
+				notificationList.SelectedItem = null;	
 			};
 			if (sharedLogic.notifications.notificationNumber > 0)
 			{

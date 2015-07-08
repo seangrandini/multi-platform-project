@@ -50,6 +50,8 @@ namespace alertApp.Droid
 				sharedLogic.UpDateInternetStatus(0);
             }
 		}
+
+
 		void createNotification(string title, string desc, Context context, Intent intent)
 		{
 			//my create notification

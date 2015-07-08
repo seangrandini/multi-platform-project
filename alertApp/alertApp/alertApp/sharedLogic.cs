@@ -22,9 +22,10 @@ namespace alertApp
 
 		public static void UpDateListView()
 		{
-			mainPage.notificationList.Unfocus();
-			mainPage.notificationList.Focus();
-			//mainPage.notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
+			if (sharedLogic.notifications.notificationNumber > 0)
+			{
+				mainPage.notificationList.ScrollTo(sharedLogic.notifications.notifactionList[sharedLogic.notifications.notificationNumber - 1], ScrollToPosition.End, false);
+			}
 		}
 		public static void UpDateInternetStatus(int tempInternetStatus)
 		{
