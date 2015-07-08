@@ -19,14 +19,6 @@ namespace alertApp
 
 		public static int notificationSaveNumber;
 		public static NotificationHistory notifications;
-
-		public static void UpDateListView()
-		{
-			if (sharedLogic.notifications.notificationNumber > 0)
-			{
-				mainPage.notificationList.ScrollTo(sharedLogic.notifications.notifactionList[sharedLogic.notifications.notificationNumber - 1], ScrollToPosition.End, false);
-			}
-		}
 		public static void UpDateInternetStatus(int tempInternetStatus)
 		{
 			sharedLogic.internetStatus = tempInternetStatus;

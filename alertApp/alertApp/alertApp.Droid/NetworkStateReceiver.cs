@@ -52,7 +52,7 @@ namespace alertApp.Droid
 		}
 
 
-		void createNotification(string title, string desc, Context context, Intent intent)
+		public static void createNotification(string title, string desc, Context context, Intent intent)
 		{
 			//my create notification
 			//Creazione Intent

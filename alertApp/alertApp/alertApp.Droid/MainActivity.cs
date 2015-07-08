@@ -117,10 +117,36 @@ namespace alertApp.Droid
         public void checkConnection()
         {
             receiver.OnReceive(this, this.Intent);
+			if (CallStatus())
+			{
+				if (sharedLogic.isPlaying != 2)
+				{
+
+					if (sharedLogic.defaultSong != null)
+					{
+						androidAudio.PlaySound(this, sharedLogic.defaultSong);
+						//song = Android.Net.Uri.Builder;
+					}
+					else
+					{
+						androidAudio.PlaySound(this, RingtoneManager.GetDefaultUri(RingtoneType.Ringtone));
+					}
+
+				}
+				NetworkStateReceiver.createNotification("Network operator is null", "Probably there's no call capibility", this, this.Intent);
+			}
         }
 		public bool CallStatus()
 		{
 			TelephonyManager tm = (TelephonyManager)this.GetSystemService(Context.TelephonyService);
+			if (tm.NetworkOperator != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
         }
 
 	}

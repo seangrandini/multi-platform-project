@@ -104,10 +104,6 @@ namespace alertApp.Droid
                 createNotification(messageTitle, messageText);
 
 				sharedLogic.notifications.Append(messageTitle, messageText);
-				/*if (sharedLogic.isPlaying == 2)
-				{
-					sharedLogic.UpDateListView();
-                }*/
             }
             else
             {

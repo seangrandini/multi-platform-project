@@ -52,14 +52,11 @@ namespace alertApp
 
 			notificationList = new ListView
 			{
-				//MinimumHeightRequest = 200,
-				//HeightRequest = 80
 				HasUnevenRows = true
-
             };
 			notificationList.ItemsSource = sharedLogic.notifications.notifactionList;
 			notificationList.BindingContext = sharedLogic.notifications;
-			notificationList.SetBinding(ListView.ItemsSourceProperty, "notifactionList");
+			notificationList.SetBinding(ListView.ItemsSourceProperty, "reverseNotificationList");
 			notificationList.ItemTemplate = new DataTemplate(typeof(NotificationCell));
 			notificationList.ItemSelected += async (sender, e) =>
 			{
@@ -67,12 +64,12 @@ namespace alertApp
 				var notifica = (Notifica)e.SelectedItem;
 				await Navigation.PushAsync(new MoreDetailsPage(notifica));
 				//notificationList.ClearValue(ListView.SelectedItemProperty);
-				notificationList.SelectedItem = null;	
+				notificationList.SelectedItem = null;
 			};
-			if (sharedLogic.notifications.notificationNumber > 0)
+			/*if (sharedLogic.notifications.notificationNumber > 0)
 			{
 				notificationList.ScrollTo(sharedLogic.notifications.notifactionList[sharedLogic.notifications.notificationNumber - 1], ScrollToPosition.End, false);
-			}
+			}*/
 
             StackLayout header = new StackLayout
             {
