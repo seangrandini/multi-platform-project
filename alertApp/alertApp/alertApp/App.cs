@@ -9,7 +9,6 @@ using Xamarin.Forms;
 using Android.Media;
 #endif
 using System.Collections.ObjectModel;
-using alertApp;
 
 namespace alertApp
 {
@@ -29,10 +28,11 @@ namespace alertApp
 
 			sharedLogic.notifications = new NotificationHistory();
             sharedLogic.notifications.LoadFromDatabase();
-			
 
+			NavigationPage.SetHasNavigationBar(this, false);
 			NavigationPage navigationPage = new NavigationPage(new tabbedMainPage());
-			MainPage = navigationPage;
+			NavigationPage.SetHasNavigationBar(this, false);
+            MainPage = navigationPage;
 
 		}
             static ObservableCollection<Ringtone> _ringtones;
@@ -71,7 +71,7 @@ namespace alertApp
                     _ringtones = new ObservableCollection<Ringtone>(list.OrderBy(e => e.Name));
                     return _ringtones;
                 }
-            }       
+            }   
 
         public static ItemDatabase Database 
         {

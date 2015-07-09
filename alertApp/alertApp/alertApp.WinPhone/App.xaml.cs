@@ -7,20 +7,11 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using alertApp.WinPhone.Resources;
+
+using Windows.UI.Popups;
 using Microsoft.Phone.Notification;
 using Microsoft.WindowsAzure.Messaging;
 using System.Text;
-using System.ServiceModel;
-
-using System.Windows.Media;
-
-using System.IO.IsolatedStorage;
-using System.Windows.Resources;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows.Controls;
-using MyAudioPlaybackAgent;
 
 namespace alertApp.WinPhone
 {
@@ -37,8 +28,6 @@ namespace alertApp.WinPhone
 		/// </summary>
 		public App()
 		{
-            // Copy media to isolated storage.
-            CopyToIsolatedStorage();
 
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
@@ -56,7 +45,7 @@ namespace alertApp.WinPhone
 			if (Debugger.IsAttached)
 			{
 				// Display the current frame rate counters.
-				//Application.Current.Host.Settings.EnableFrameRateCounter = true;
+				Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
 				// Show the areas of the app that are being redrawn in each frame.
 				//Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -78,55 +67,12 @@ namespace alertApp.WinPhone
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-			var channel = HttpNotificationChannel.Find("MyPushChannel");
-			if (channel == null)
-			{
-				channel = new HttpNotificationChannel("MyPushChannel");
-				channel.Open();
-				channel.BindToShellToast();
-				channel.BindToShellTile();
-			}
-
-			channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
-			{
-				var hub = new NotificationHub("alarmapp", "Endpoint=sb://alarmapp-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=KIZ6Tt3zZ27QA5Yu5X8QKpRRd/MgZ8u2b2ShyPw/R8s=");
-				await hub.RegisterNativeAsync(args.ChannelUri.ToString());
-			});
-			channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(Channel_ShellToastNotificationReceived);
-
-            
-        }
-		void Channel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
-		{
-			StringBuilder message = new StringBuilder();
-			string relativeUri = string.Empty;
-
-			message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
 			
-			// Parse out the information that was part of the message.
-			foreach (string key in e.Collection.Keys)
-			{
-				//message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
-				message.AppendFormat("{0}\n", e.Collection[key]);
-                if (string.Compare(
-					key,
-					"wp:Param",
-					System.Globalization.CultureInfo.InvariantCulture,
-					System.Globalization.CompareOptions.IgnoreCase) == 0)
-				{
-					relativeUri = e.Collection[key];
-				}
-			}
+		}
 
-			// Display a dialog of all the fields in the toast.
-			MainPage.questo.Dispatcher.BeginInvoke(() => MessageBox.Show(message.ToString()));
-            MainPage.questoBgPlayer.Play();
-            //MessageBox.Show(message.ToString());
-            // Copy media to isolated storage.
-        }
-    // Code to execute when the application is activated (brought to foreground)
-    // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+		// Code to execute when the application is activated (brought to foreground)
+		// This code will not execute when the application is first launched
+		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
             
 		}
@@ -283,34 +229,5 @@ namespace alertApp.WinPhone
 				throw;
 			}
 		}
-        private void CopyToIsolatedStorage()
-        {
-            using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                string[] files = new string[] { "86502^alarm.wav", "Kick in Rock.mp3", "Nokia - Attraction.mp3", "Nokia - Badinerie.mp3" , "Nokia - City Bird.mp3", "Nokia - Frog.mp3", "Nokia - Hurdy Gurdy.mp3", "Nokia - Intro.mp3", "Nokia - Jumping.mp3", "Nokia - Kick.mp3", "Nokia - Knick Knack.mp3", "Nokia - Lamb.mp3", "Nokia - Low.mp3", "Nokia - Merry Xmas.mp3", "Nokia - Orient.mp3", "Nokia - Ring Ring.mp3", "Nokia - Robo N1X.mp3", "Nokia - Rocket.mp3", "Nokia - Thats It.mp3", "Nokia - The Buffoon.mp3", "Nokia - Tick Tick.mp3", "Nokia Tune 2013.mp3", "Nokia Tune V2.mp3", "Nokia Tune V3.mp3" };
-
-                foreach (var _fileName in files)
-                {
-                    if (!storage.FileExists(_fileName))
-                    {
-                        string _filePath = "Audio/" + _fileName;
-                        StreamResourceInfo resource = Application.GetResourceStream(new Uri(_filePath, UriKind.Relative));
-
-                        using (IsolatedStorageFileStream file = storage.CreateFile(_fileName))
-                        {
-                            int chunkSize = 4096;
-                            byte[] bytes = new byte[chunkSize];
-                            int byteCount;
-
-                            while ((byteCount = resource.Stream.Read(bytes, 0, chunkSize)) > 0)
-                            {
-                                file.Write(bytes, 0, byteCount);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    }
+	}
 }

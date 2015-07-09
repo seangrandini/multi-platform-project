@@ -11,7 +11,7 @@ namespace alertApp
 		public MoreDetailsPage(Notifica notifica)
 		{
 			
-			//NavigationPage.SetHasNavigationBar(this, false);
+			NavigationPage.SetHasNavigationBar(this, false);
 			Label TitleLabel = new Label
 			{
 				HorizontalOptions = LayoutOptions.Start,

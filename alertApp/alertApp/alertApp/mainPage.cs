@@ -16,6 +16,7 @@ namespace alertApp
 		public static StackLayout footer;
 		public mainPage()
         {
+			NavigationPage.SetHasNavigationBar(this, false);
 			Label title = new Label
             {
                 Text = "AlarmApp",

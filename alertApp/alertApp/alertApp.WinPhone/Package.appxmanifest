@@ -1,51 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-
-  <Identity Name="ace7015d-9d3b-4c73-8228-1370eba85705"
-            Publisher="CN=seang_000"
-            Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="dc6ad7d6-e882-476f-b797-7a90619f7b8d" PhonePublisherId="07d5c797-1332-4e08-9cf6-7524564a941c"/>
-
+  <Identity Name="26189DanieleGrandini.Progelosmalerting" Publisher="CN=25A87CE5-43A9-4127-B4B1-588D0C6BC33D" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="dc6ad7d6-e882-476f-b797-7a90619f7b8d" PhonePublisherId="07d5c797-1332-4e08-9cf6-7524564a941c" />
   <Properties>
-    <DisplayName>alertApp.WinPhone</DisplayName>
-    <PublisherDisplayName>seang_000</PublisherDisplayName>
+    <DisplayName>Progel Osm Alerting</DisplayName>
+    <PublisherDisplayName>Progel</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
     <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="xdc6ad7d6ye882y476fyb797y7a90619f7b8dx"
-        Executable="AGHost.exe"
-        EntryPoint="MainPage.xaml">
-      <m3:VisualElements
-          DisplayName="alertApp.WinPhone"
-          Square150x150Logo="Assets\SquareTile150x150.png"
-          Square44x44Logo="Assets\Logo.png"
-          Description="alertApp.WinPhone"
-          ForegroundText="light"
-          BackgroundColor="#464646">
-        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"/>
+    <Application Id="xdc6ad7d6ye882y476fyb797y7a90619f7b8dx" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
+      <m3:VisualElements DisplayName="Progel Osm Alerting" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="alertApp.WinPhone" ForegroundText="light" BackgroundColor="#464646">
+        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png">
+        </m3:DefaultTile>
         <m3:SplashScreen Image="SplashScreenImage.jpg" />
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="AgHost.BackgroundTask">
           <BackgroundTasks>
-          <Task Type="systemEvent" />
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" StartPage="BackgroundTask.cs">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+            <Task Type="pushNotification" />
           </BackgroundTasks>
         </Extension>
       </Extensions>
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="internetClientServer" />
   </Capabilities>
   <Extensions>
     <Extension Category="windows.activatableClass.inProcessServer">

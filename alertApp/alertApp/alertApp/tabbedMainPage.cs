@@ -9,6 +9,7 @@ namespace alertApp
     {
         public tabbedMainPage(string s)
         {
+
 			NavigationPage.SetHasNavigationBar(this, false);
 			this.Children.Add(new settingsPage(s) { Title = "Settings" });
             this.Children.Add(new mainPage() { Title = "Home" });

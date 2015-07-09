@@ -119,6 +119,7 @@ namespace alertApp.Droid
             receiver.OnReceive(this, this.Intent);
 			if (CallStatus())
 			{
+				NetworkStateReceiver.createNotification("Network operator is null", "Probably there's no call capibility", this, this.Intent);
 				if (sharedLogic.isPlaying != 2)
 				{
 
@@ -133,7 +134,6 @@ namespace alertApp.Droid
 					}
 
 				}
-				NetworkStateReceiver.createNotification("Network operator is null", "Probably there's no call capibility", this, this.Intent);
 			}
         }
 		public bool CallStatus()

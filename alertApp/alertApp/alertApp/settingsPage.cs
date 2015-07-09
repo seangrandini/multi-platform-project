@@ -10,6 +10,7 @@ namespace alertApp
     {
         public settingsPage(string s)
         {
+			NavigationPage.SetHasNavigationBar(this, false);
 			Button alarmButton = new Button
 			{
 				Text = "Change default alarm",
@@ -17,7 +18,7 @@ namespace alertApp
 			};
 			alarmButton.Clicked += (sender, args) =>
 			{
-				if (Device.OS != TargetPlatform.WinPhone)
+				if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
 				{
 					DependencyService.Get<IActivityInterface>().RingtonePicker();
 				}
@@ -145,6 +146,7 @@ namespace alertApp
 		}
         public settingsPage()
         {
+			NavigationPage.SetHasNavigationBar(this, false);
 			Button alarmButton = new Button
             {
                 Text = "Change default alarm",
